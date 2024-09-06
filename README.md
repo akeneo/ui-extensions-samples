@@ -100,6 +100,7 @@ Call `/api/rest/v1/ui-extension'` with a `POST`. The body should look like this:
 {
   "code": "my_category_extension",
   "position": "edit_category_tab",
+  "type": "simple_iframe",
   "configuration": {
     "url": "https://mycustomerwebsite.com/iframe/",
     "labels": {
@@ -114,8 +115,12 @@ It returns:
 - 422 if there is a violation error
 - 400 if JSON is invalid
 
-The `configuration` depends on the `position`. Available positions are `edit_product_tab` and `edit_category_tab`.
-For now, the only configuration keys are the same for both positions:
+The `configuration` depends on the `position`. Available positions are `edit_product_tab`, `edit_category_tab` and `edit_product_header`.
+For now, the only configuration keys are the same for all the position.
+
+The `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :
+- `simple_iframe` for `edit_product_tab` and `edit_category_tab`
+- `simple_button` for `edit_product_header`
 
 ### url
 
@@ -169,6 +174,7 @@ It returns all UI extensions in this format:
   {
     "code": "my_category_extension_1",
     "position": "edit_category_tab",
+    "type": "simple_iframe",
     "configuration": {
       "config_key_a": "value_key_a",
       "config_key_b": "value_key_b"
@@ -177,6 +183,16 @@ It returns all UI extensions in this format:
   {
     "code": "my_category_extension_2",
     "position": "edit_category_tab",
+    "type": "simple_iframe",
+    "configuration": {
+      "config_key_a": "value_key_a",
+      "config_key_b": "value_key_b"
+    }
+  },
+  {
+    "code": "my_edit_product_header_extension_1",
+    "position": "edit_product_header",
+    "type": "simple_button",
     "configuration": {
       "config_key_a": "value_key_a",
       "config_key_b": "value_key_b"

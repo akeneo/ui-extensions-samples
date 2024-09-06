@@ -9,6 +9,7 @@ const addEditCategoryTabUiExtension = async (res) => {
             body: JSON.stringify({
                 code: 'linked_products',
                 position: 'edit_category_tab',
+                type: 'simple_iframe',
                 configuration: {url: `${NODE_URL}/edit_category_tab`, labels: {en_US: 'Linked Products'}}
             })
         });

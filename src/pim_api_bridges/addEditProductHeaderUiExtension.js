@@ -1,7 +1,7 @@
 import {NODE_URL, PIM_URL} from "../env.js";
 import {forwardResponse, getBearer} from "./helpers.js";
 
-const addEditProductTabUiExtension = async (res) => {
+const addEditProductHeaderUiExtension = async (res) => {
     try {
         const response = await fetch(`${PIM_URL}/api/rest/v1/ui-extension`, {
             method: 'POST',
@@ -10,10 +10,10 @@ const addEditProductTabUiExtension = async (res) => {
                 'Authorization': `Bearer ${await getBearer()}`
             },
             body: JSON.stringify({
-                code: 'short_view',
-                position: 'edit_product_tab',
-                type: 'simple_iframe',
-                configuration: {url: `${NODE_URL}/edit_product_tab`, labels: {en_US: 'Short view'}}
+                code: 'custom_button',
+                position: 'edit_product_header',
+                type: 'simple_button',
+                configuration: {url: `https://akeneo.com`, labels: {en_US: 'My custom button'}}
             })
         });
 
@@ -24,4 +24,4 @@ const addEditProductTabUiExtension = async (res) => {
     }
 }
 
-export {addEditProductTabUiExtension}
+export {addEditProductHeaderUiExtension}

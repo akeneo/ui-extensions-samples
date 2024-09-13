@@ -19,17 +19,20 @@ function Home() {
     }
 
     const addEditProductTabUiExtension = async () => callExpressServer('addEditProductTabUiExtension');
+    const addEditProductHeaderUiExtension = async () => callExpressServer('addEditProductHeaderUiExtension');
     const addEditCategoryTabUiExtension = async () => callExpressServer('addEditCategoryTabUiExtension');
     const deleteProductTabUiExtension = async (code) => callExpressServer(`deleteTabExtension?code=${code}`);
 
     return (
         <ThemeProvider theme={pimTheme}>
             <Button level={'secondary'} onClick={addEditProductTabUiExtension}>Add Edit Product UI Extension</Button>{' '}
+            <Button level={'secondary'} onClick={addEditProductHeaderUiExtension}>Add Edit Product Header UI Extension</Button>{' '}
             <Button level={'secondary'} onClick={addEditCategoryTabUiExtension}>Add Edit Category UI Extension</Button>
             <Table>
                 <Table.Header>
                     <Table.HeaderCell>Code</Table.HeaderCell>
                     <Table.HeaderCell>Position</Table.HeaderCell>
+                    <Table.HeaderCell>Type</Table.HeaderCell>
                     <Table.HeaderCell>Configuration</Table.HeaderCell>
                     <Table.HeaderCell>Actions</Table.HeaderCell>
                 </Table.Header>
@@ -49,6 +52,7 @@ function Home() {
                     </Table.Row>) : (uiExtensions || []).map(uiExtension => <Table.Row>
                         <Table.Cell>{uiExtension.code}</Table.Cell>
                         <Table.Cell>{uiExtension.position}</Table.Cell>
+                        <Table.Cell>{uiExtension.type}</Table.Cell>
                         <Table.Cell>{JSON.stringify(uiExtension.configuration)}</Table.Cell>
                         <Table.Cell><Button level={'danger'} onClick={() => deleteProductTabUiExtension(uiExtension.code)}>Delete</Button></Table.Cell>
                     </Table.Row>)}

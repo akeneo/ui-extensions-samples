@@ -10,6 +10,7 @@ import path from 'path';
 import {addEditProductTabUiExtension} from "./pim_api_bridges/addEditProductTabUiExtension.js";
 import { fileURLToPath } from 'url';
 import {PORT} from "./env.js";
+import {addEditProductHeaderUiExtension} from "./pim_api_bridges/addEditProductHeaderUiExtension.js";
 const app = express();
 
 app.use(express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), '../build')));
@@ -17,6 +18,11 @@ app.use(express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), '
 app.get('/addEditProductTabUiExtension', async (req, res) => {
   console.log(`Add Edit Product Tab UI Extension...`);
   await addEditProductTabUiExtension(res);
+});
+
+app.get('/addEditProductHeaderUiExtension', async (req, res) => {
+  console.log(`Add Edit Product Header UI Extension...`);
+  await addEditProductHeaderUiExtension(res);
 });
 
 app.get('/addEditCategoryTabUiExtension', async (req, res) => {

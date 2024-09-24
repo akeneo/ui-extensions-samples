@@ -12,7 +12,7 @@ const useGetAttributes = (attributeCodes) => {
                 })
             });
         }
-    }, [attributeCodes]);
+    }, [JSON.stringify(attributeCodes)]);
 
     return attributes || [];
 }

@@ -14,6 +14,9 @@ const forwardResponse = async (res, response, expectedCode) => {
         res.send(JSON.stringify({error: json.message}));
     } else {
         console.error(`Unknown status ${response.status}`);
+        response.json().then((body) => {
+            console.error(body);
+        })
     }
 }
 

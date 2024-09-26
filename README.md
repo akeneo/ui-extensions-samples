@@ -1,100 +1,34 @@
-# Sample Simple Iframe
+# UI Extension samples
 
-This mini application allows to display several screens in a PIM.
+## Prerequisites: BETA stage
 
-By default, it is accessible in `http://localhost:8090`
+We would like to inform you that this feature is currently in its <b>BETA</b> stage. As part of the ongoing development process, method names, parameter names, and other aspects of the functionality may be subject to change. We are continually working to improve and refine the feature.
+Please be aware that updates or modifications may occur without prior notice as we aim to enhance stability, performance, and usability.
+Thank you for your understanding and collaboration during this phase.
 
-This application is separated into 2 parts:
+## Simple iframe & simple buttons example
 
-### A React server
+This application example gives access to 3 features:
+- A UI for listing and create UI Extensions,
+- An example page for the product edit tab position, displaying the product values in a compressed design,
+- An example page for the category edit tab position, displaying the products belonging to a category.
 
-The role of the React server is to display React elements. It displays 3 pages:
-- The homepage (`/`)
-- The content of the Edit Product Tab (`/edit_product_tab`)
-- The content of the Edit Category Tab (`/edit_category_tab`)
+Please read the [README.md](./simple_iframe/README.md) in the simple_iframe folder.
 
-### An Express server
+## DSM SDK script example
 
-The role of the Express server is to listen for calls coming from React server, then call the PIM API, and finally return the result to the React server.
-Indeed, the PIM API cannot be used to directly be called by a browser (i.e. this is a server-to-server API), so we need to add some bridges.
+This folder contains a minimal example for the SDK Script feature, including the Akeneo DSM.
 
-Here is a non-exhaustive list of the endpoints:
-- Get attributes (`/getAttributes?codes=sku,description`)
-- Get product (`/getProduct?uuid=this-is-a-uuid`)
-- ...
+Please check the [README.md](./dsm_sdk_script/README.md)
 
-If this server never authenticate, a first call is done to get an access_token.
+# API documentation
 
-> [!WARNING]  
-> There is no API authorization token retry process; once the auth_token is done (after 1 hour), you need to stop and run the Express server to clear cache. 
-
-# How to run it?
-
-## How to deploy
-
-### Install dependencies
-
-```
-npm install
-```
-
-### Fill the env variables
-
-Create a new Connection in your PIM, then fill the `env.js` file.
-
-### Build react 
-
-```
-npm run build
-```
-
-### Init gcloud
-
-Init gcloud then follow the process and choose on which project you want to deploy your app:
-```
-gcloud init
-```
-
-### deploy the app
-
-```
-gcloud app deploy
-```
-
-## Local setup
-
-### Install dependencies
-
-```
-npm install
-npm install -g serve
-```
-
-### Fill the env variables
-
-Create a new Connection in your PIM, then fill the `env.js` file.
-
-### Run the server:
-
-To build and serve the server, run
-```
-npm run build
-node src/server.js
-```
-
-[Optional] To run the Express server in watch mode, install `nodemon`, then
-```
-nodemon src/server.js
-```
-
-# The PIM UI Extensions API
-
-There are 4 endpoints: create, update, delete and list.
+There are 3 endpoints: upsert, delete and list.
 Each of this endpoint will return a 404 id the feature flag `enable-ui-extension` is disabled.
 
-## Create a UI Extension
+## Upsert a UI Extension
 
-Call `/api/rest/v1/ui-extension'` with a `POST`. The body should look like this:
+Call `/api/rest/v1/ui-extension/my_category_extension'` with a `POST`. The body should look like this:
 
 ```json
 {
@@ -112,6 +46,7 @@ Call `/api/rest/v1/ui-extension'` with a `POST`. The body should look like this:
 
 It returns:
 - 201 if UI extension is created
+- 204 if UI extension is updated
 - 422 if there is a violation error
 - 400 if JSON is invalid
 
@@ -142,16 +77,6 @@ An object of locale*label. For example:
   }
 }
 ```
-
-## Update a UI Extension
-
-Call `/api/rest/v1/ui-extension/ui_extension_code` with a `PATCH`. The body is the same as Create method.
-
-It returns:
-- 204 if UI extension is updated
-- 404 if the UI extension does not exist
-- 422 if there is a violation error
-- 400 if JSON is invalid
 
 ## Delete a UI Extension
 

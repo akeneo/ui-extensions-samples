@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+}
+body,
+input,
+button,
+select,
+textarea {
+  font-family: 'Lato';
+  font-size: 13px;
+}
+* {
+  box-sizing: border-box;
+}

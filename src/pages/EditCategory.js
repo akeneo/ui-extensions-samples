@@ -50,8 +50,8 @@ function EditCategory() {
                         </Placeholder></Table.Cell></Table.Row>}
                     {typeof products !== 'undefined' && products.map(product => <Table.Row>
                         <Table.Cell><Link href={`${PIM_URL}/#/enrich/product/${product.uuid}`} target={'_parent'}>{product.uuid}</Link></Table.Cell>
-                        <Table.Cell>{product.values.sku[0].data}</Table.Cell>
-                        <Table.Cell>{product.values.name[0].data}</Table.Cell>
+                        <Table.Cell>{'sku' in product.values ? product.values.sku[0].data : ''}</Table.Cell>
+                        <Table.Cell>{'name' in product.values ? product.values.name[0].data : ''}</Table.Cell>
                         <Table.Cell><IconButton
                             level={'danger'}
                             onClick={() => handleRemove(product.uuid)}

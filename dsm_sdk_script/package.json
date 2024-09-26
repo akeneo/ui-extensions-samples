@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "akeneo-design-system": "^1.0.4",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

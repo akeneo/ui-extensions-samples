@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 20px;
 }
 body,
 input,
@@ -8,6 +8,7 @@ select,
 textarea {
   font-family: 'Lato';
   font-size: 13px;
+  color: #67768a;
 }
 * {
   box-sizing: border-box;

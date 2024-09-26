@@ -1,4 +1,3 @@
-import {addEditCategoryTabUiExtension} from "./pim_api_bridges/addEditCategoryTabUiExtension.js";
 import {deleteTabExtension} from "./pim_api_bridges/deleteTabExtension.js";
 import {getProduct} from "./pim_api_bridges/getProduct.js";
 import {getProducts} from "./pim_api_bridges/getProducts.js";
@@ -7,27 +6,17 @@ import {getAttributes} from "./pim_api_bridges/getAttributes.js";
 import {listUiExtensions} from "./pim_api_bridges/listUiExtensions.js";
 import express from 'express';
 import path from 'path';
-import {addEditProductTabUiExtension} from "./pim_api_bridges/addEditProductTabUiExtension.js";
 import { fileURLToPath } from 'url';
 import {PORT} from "./env.js";
-import {addEditProductHeaderUiExtension} from "./pim_api_bridges/addEditProductHeaderUiExtension.js";
+import {addUiExtension} from "./pim_api_bridges/addUiExtension.js";
 const app = express();
 
 app.use(express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), '../build')));
+app.use(express.json());
 
-app.get('/addEditProductTabUiExtension', async (req, res) => {
-  console.log(`Add Edit Product Tab UI Extension...`);
-  await addEditProductTabUiExtension(res);
-});
-
-app.get('/addEditProductHeaderUiExtension', async (req, res) => {
-  console.log(`Add Edit Product Header UI Extension...`);
-  await addEditProductHeaderUiExtension(res);
-});
-
-app.get('/addEditCategoryTabUiExtension', async (req, res) => {
-  console.log(`Add Edit Category Tab UI Extension...`);
-  await addEditCategoryTabUiExtension(res);
+app.post('/addUiExtension', async (req, res) => {
+  console.log(`Add UI Extension...`);
+  await addUiExtension(res, req);
 });
 
 app.get('/deleteTabExtension', async (req, res) => {

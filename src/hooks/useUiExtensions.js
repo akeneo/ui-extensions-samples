@@ -8,6 +8,9 @@ const useUiExtensions = (tick) => {
             response.json().then(json => {
                 setUiExtensions(json);
             })
+        }).catch((e) => {
+            console.error(e);
+            setUiExtensions(null);
         })
     }, [tick]);
 

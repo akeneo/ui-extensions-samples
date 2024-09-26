@@ -1,10 +1,20 @@
 import React from "react";
 import {ThemeProvider} from "styled-components";
-import {Button, pimTheme, Placeholder, SkeletonPlaceholder, Table, UsersIllustration} from "akeneo-design-system";
+import {
+    Button,
+    Helper, Information,
+    pimTheme,
+    Placeholder, ProjectIllustration,
+    SkeletonPlaceholder,
+    Table,
+    UsersIllustration
+} from "akeneo-design-system";
 import {EXPRESS_SERVER} from "../env.js";
 import {useUiExtensions} from "../hooks/index.js";
+import {useNavigate} from "react-router-dom";
 
 function Home() {
+    const navigate = useNavigate();
     const [tick, setTick] = React.useState(true);
     const uiExtensions = useUiExtensions(tick);
 
@@ -18,16 +28,21 @@ function Home() {
         }
     }
 
-    const addEditProductTabUiExtension = async () => callExpressServer('addEditProductTabUiExtension');
-    const addEditProductHeaderUiExtension = async () => callExpressServer('addEditProductHeaderUiExtension');
-    const addEditCategoryTabUiExtension = async () => callExpressServer('addEditCategoryTabUiExtension');
     const deleteProductTabUiExtension = async (code) => callExpressServer(`deleteTabExtension?code=${code}`);
 
     return (
         <ThemeProvider theme={pimTheme}>
-            <Button level={'secondary'} onClick={addEditProductTabUiExtension}>Add Edit Product UI Extension</Button>{' '}
-            <Button level={'secondary'} onClick={addEditProductHeaderUiExtension}>Add Edit Product Header UI Extension</Button>{' '}
-            <Button level={'secondary'} onClick={addEditCategoryTabUiExtension}>Add Edit Category UI Extension</Button>
+            <h1>UI Extensions</h1>
+            <Information
+                illustration={<ProjectIllustration />}
+                title={'Feature in BETA: Subject to Changes'}
+            >
+                We would like to inform you that this feature is currently in its <em>BETA</em> stage. As part of the ongoing development process, method names, parameter names, and other aspects of the functionality may be subject to change. We are continually working to improve and refine the feature.
+                <p/>
+                Please be aware that updates or modifications may occur without prior notice as we aim to enhance stability, performance, and usability.
+                <p/>
+                Thank you for your understanding and collaboration during this phase.
+            </Information>
             <Table>
                 <Table.Header>
                     <Table.HeaderCell>Code</Table.HeaderCell>
@@ -37,7 +52,13 @@ function Home() {
                     <Table.HeaderCell>Actions</Table.HeaderCell>
                 </Table.Header>
                 <Table.Body>
-                    {typeof uiExtensions !== 'undefined' && uiExtensions.length === 0 && <Table.Row><Table.Cell colspan={4}>
+                    {uiExtensions === null && <Table.Row><Table.Cell colspan={4}>
+                        <Helper level={'error'}>
+                        An error occurred during UI Extension fetch. Check console.
+                        </Helper>
+                        </Table.Cell></Table.Row>
+                    }
+                    {typeof uiExtensions !== 'undefined' && uiExtensions !== null && uiExtensions.length === 0 && <Table.Row><Table.Cell colspan={4}>
                         <Placeholder
                             illustration={<UsersIllustration />}
                             title="No UI extensions"
@@ -53,11 +74,12 @@ function Home() {
                         <Table.Cell>{uiExtension.code}</Table.Cell>
                         <Table.Cell>{uiExtension.position}</Table.Cell>
                         <Table.Cell>{uiExtension.type}</Table.Cell>
-                        <Table.Cell>{JSON.stringify(uiExtension.configuration)}</Table.Cell>
+                        <Table.Cell><pre>{JSON.stringify(uiExtension.configuration)}</pre></Table.Cell>
                         <Table.Cell><Button level={'danger'} onClick={() => deleteProductTabUiExtension(uiExtension.code)}>Delete</Button></Table.Cell>
                     </Table.Row>)}
                 </Table.Body>
             </Table>
+            <Button onClick={() => navigate('/new')}>Create UI Extension</Button>
         </ThemeProvider>
     )
 }

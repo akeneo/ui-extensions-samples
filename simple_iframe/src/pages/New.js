@@ -46,7 +46,7 @@ function New() {
     const configuration = {
         'simple_iframe': {
             label: 'Simple iframe',
-            positions: ['edit_product_tab', 'edit_category_tab'],
+            positions: ['edit_product_tab', 'edit_category_tab', 'product_grid_quick_action'],
             configuration: ['url'],
         },
         'simple_button': {

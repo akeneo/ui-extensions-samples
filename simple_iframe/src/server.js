@@ -33,7 +33,7 @@ app.get('/getProduct', async (req, res) => {
 
 app.get('/getProducts', async (req, res) => {
   console.log('Get Products...');
-  res.send(await getProducts(req.query.categoryCode));
+  res.send(await getProducts(req.query.search));
 });
 
 app.get('/removeCategoryOfProduct', async (req, res) => {

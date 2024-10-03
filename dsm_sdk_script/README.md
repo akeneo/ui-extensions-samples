@@ -18,4 +18,8 @@ npm run dev
 npm run build
 ```
 
-The file in `dist/assets/index.js` is your UI Extension.
+The file in `dist/demo.js` is your built UI Extension, just upload it to your PIM!
+
+## Customize
+
+Please update `src/App.tsx` file to match your needs.

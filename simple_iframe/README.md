@@ -56,6 +56,11 @@ gcloud app deploy
 
 ## Local setup
 
+Build the React app
+```
+npm run build
+```
+
 Start the express server
 ```
 npm start

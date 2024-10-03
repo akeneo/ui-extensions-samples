@@ -22,9 +22,8 @@ const addUiExtension = async (res, req) => {
     const code = req.body.code;
     try {
         const formData = new FormData();
-        if (req.body.configuration.file) {
-            const data = req.body.configuration.file;
-            formData.set('file', new Blob([data]), "customer_script.js");
+        if (req.file) {
+            formData.set('file', new Blob([req.file.buffer.toString()]), req.file.originalname);
         }
         formData.set('code', code);
         formData.set('type', req.body.type);

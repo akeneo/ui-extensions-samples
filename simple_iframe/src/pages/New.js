@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Field, pimTheme, SelectInput, TextAreaInput, TextInput} from "akeneo-design-system";
+import {Button, Field, pimTheme, SelectInput, TextInput} from "akeneo-design-system";
 import styled, {ThemeProvider} from "styled-components";
 import {EXPRESS_SERVER, NODE_URL} from "../env.js";
 import {useNavigate} from "react-router-dom";
@@ -10,6 +10,23 @@ const FieldList = styled.div`
     } 
 `
 
+const flatSearchParameters = (parameters, prefix) => {
+    if (prefix === void 0) { prefix = ''; }
+    var result = {};
+    for (var parameterKey in parameters) {
+        if (Object.prototype.hasOwnProperty.call(parameters, parameterKey)) {
+            var flattenKey = prefix ? "".concat(prefix, "[").concat(parameterKey, "]") : parameterKey;
+            if (typeof parameters[parameterKey] === 'object' && parameters[parameterKey] !== null && !('name' in parameters[parameterKey])) {
+                Object.assign(result, flatSearchParameters(parameters[parameterKey], flattenKey));
+            }
+            else {
+                result[flattenKey] = parameters[parameterKey];
+            }
+        }
+    }
+    return result;
+};
+
 function New() {
     const navigate = useNavigate();
     const [type, setType] = React.useState('simple_iframe');
@@ -18,16 +35,12 @@ function New() {
     const [code, setCode] = React.useState('');
     const [url, setUrl] = React.useState('');
     const [dirtyCode, setDirtyCode] = React.useState(false);
-    const [file, setFile] = React.useState('');
+    const [file, setFile] = React.useState(null);
 
     const predefinedUrls = {
         'Akeneo.com': 'https://www.akeneo.com',
         'Category': `${NODE_URL}/edit_category_tab`,
         'Product': `${NODE_URL}/edit_product_tab`,
-    }
-
-    const predefinedScripts = {
-        'Basic': "document.body.innerHTML = 'It works!';",
     }
 
     const configuration = {
@@ -72,12 +85,14 @@ function New() {
     }
 
     const callExpressServer = async (params) => {
+        const formData = new FormData();
+        const flatParams = flatSearchParameters(params);
+        Object.keys(flatParams).forEach((key) => {
+            formData.set(key, flatParams[key]);
+        });
         const response = await fetch(`${EXPRESS_SERVER}/addUiExtension`, {
             method: 'POST',
-            body: JSON.stringify(params),
-            headers: {
-                'Content-Type': 'application/json',
-            }
+            body: formData,
         });
         const json = await response.json();
         if (json.error) {
@@ -131,10 +146,8 @@ function New() {
                 <TextInput value={url} onChange={setUrl}></TextInput>
             </Field>}
 
-            {configuration[type].configuration.includes('file') && <Field label={'File'} actions={<>
-                {Object.keys(predefinedScripts).map((s) => <Button ghost onClick={() => setFile(predefinedScripts[s])} size={"small"} level={"tertiary"}>{s}</Button>)}
-            </>}>
-                <TextAreaInput value={file} onChange={setFile}></TextAreaInput>
+            {configuration[type].configuration.includes('file') && <Field label={'File'}>
+                <input type='file' onChange={(event) => setFile(event.target.files[0])}/>
             </Field>}
         </FieldList>
         <Button onClick={handleCreate} disabled={code === ''}>Create</Button>

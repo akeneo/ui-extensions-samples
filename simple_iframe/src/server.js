@@ -5,16 +5,18 @@ import {updateProductCategoryCodes} from "./pim_api_bridges/updateProductCategor
 import {getAttributes} from "./pim_api_bridges/getAttributes.js";
 import {listUiExtensions} from "./pim_api_bridges/listUiExtensions.js";
 import express from 'express';
+import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {PORT} from "./env.js";
 import {addUiExtension} from "./pim_api_bridges/addUiExtension.js";
 const app = express();
+const upload = multer({ storage: multer.memoryStorage() })
 
 app.use(express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), '../build')));
 app.use(express.json());
 
-app.post('/addUiExtension', async (req, res) => {
+app.post('/addUiExtension', upload.single('configuration[file]'), async (req, res) => {
   console.log(`Add UI Extension...`);
   await addUiExtension(res, req);
 });

@@ -8,10 +8,11 @@ Thank you for your understanding and collaboration during this phase.
 
 ## Simple iframe & simple buttons example
 
-This application example gives access to 3 features:
+This application example gives access to 4 features:
 - A UI for listing and create UI Extensions,
 - An example page for the product edit tab position, displaying the product values in a compressed design,
 - An example page for the category edit tab position, displaying the products belonging to a category.
+- An example page for the Quick action position, displaying the products / product models belonging to a product grid selection.
 
 Please read the [README.md](./simple_iframe/README.md) in the simple_iframe folder.
 
@@ -54,7 +55,7 @@ The `configuration` depends on the `position`. Available positions are `edit_pro
 For now, the only configuration keys are the same for all the position.
 
 The `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :
-- `simple_iframe` for `edit_product_tab` and `edit_category_tab`
+- `simple_iframe` for `edit_product_tab`, `edit_category_tab` and `product_grid_quick_action`
 - `simple_button` for `edit_product_header`
 
 ### url
@@ -132,7 +133,7 @@ When loading an iframe, several parameters are send as SearchParameters in a GET
 
 For example, when `url` is `https://customerwebsite.com/iframe/`, the called URL is `https://customerwebite.com/iframe/?paramA=valueA&paramB=valueB`
 
-For all positions, parameters relative to the connected user are sent:
+For all positions except `product_grid_quick_action`, parameters relative to the connected user are sent:
 - `user[catalog_locale]`
 - `user[catalog_scope]`
 - `user[ui_locale]`
@@ -145,3 +146,27 @@ For `edit_product_tab` position, these parameters are sent:
 
 For `edit_category_tab` position, this parameter is sent:
 - `category[code]`
+
+For `product_grid_quick_action` position, an object is sent by the parent iframe with a [postMessage JS event](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage):
+```json
+{
+  "filters": {
+    "productFilters": {
+      "uuid": [
+        {
+          "operator": "IN",
+          "value": [
+            "90faabea-83ce-4f0a-85e4-9832abc565d6"
+          ]
+        }
+      ]
+    },
+    "productModelFilters": []
+  },
+  "itemsCount": 1,
+  "context": {
+    "locale": "en_US",
+    "scope": "ecommerce"
+  }
+}
+```

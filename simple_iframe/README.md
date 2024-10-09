@@ -13,6 +13,7 @@ The role of the React server is to display React elements. It displays 4 pages:
 - The create page (`/new`)
 - The content of the Edit Product Tab (`/edit_product_tab`)
 - The content of the Edit Category Tab (`/edit_category_tab`)
+- The content of the Quick Action (`/product_grid_quick_action`)
 
 ### An Express server
 

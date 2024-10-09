@@ -6,7 +6,7 @@ const useGetProductsFromCategory = (categoryCode, tick) => {
 
     React.useEffect(() => {
         if (categoryCode) {
-            fetch(`${EXPRESS_SERVER}/getProducts?categoryCode=${categoryCode}`).then((response) => {
+            fetch(`${EXPRESS_SERVER}/getProducts?search={"categories":[{"operator":"IN","value":["${categoryCode}"]}]}&limit=100`).then((response) => {
                 response.json().then((json) => {
                     setProducts(json);
                 })

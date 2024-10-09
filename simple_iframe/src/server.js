@@ -10,6 +10,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import {PORT} from "./env.js";
 import {addUiExtension} from "./pim_api_bridges/addUiExtension.js";
+import {getProductModels} from "./pim_api_bridges/getProductModels.js";
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() })
 
@@ -33,7 +34,12 @@ app.get('/getProduct', async (req, res) => {
 
 app.get('/getProducts', async (req, res) => {
   console.log('Get Products...');
-  res.send(await getProducts(req.query.categoryCode));
+  res.send(await getProducts(req.query.search));
+});
+
+app.get('/getProductModels', async (req, res) => {
+  console.log('Get Product Models...');
+  res.send(await getProductModels(req.query.search));
 });
 
 app.get('/removeCategoryOfProduct', async (req, res) => {

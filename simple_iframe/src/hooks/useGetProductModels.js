@@ -3,20 +3,20 @@ import {EXPRESS_SERVER} from "../env.js";
 
 const useGetProductModels = (search) => {
 
-    const [products, setProducts] = React.useState([]);
+    const [productModels, setProductModels] = React.useState([]);
 
     React.useEffect(() => {
         if(search !== '' && search !== '[]') {
             fetch(`${EXPRESS_SERVER}/getProductModels?search=${search}`).then((response) => {
                 response.json().then((json) => {
-                    setProducts(json);
+                    setProductModels(json);
                 })
             });
         }
 
     }, [search]);
 
-    return products;
+    return productModels;
 }
 
 export {useGetProductModels}

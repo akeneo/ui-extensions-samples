@@ -1,13 +1,13 @@
 import React from "react";
 import {EXPRESS_SERVER} from "../env.js";
 
-const useGetProducts = (search) => {
+const useGetProductModels = (search) => {
 
     const [products, setProducts] = React.useState([]);
 
     React.useEffect(() => {
         if(search !== '' && search !== '[]') {
-            fetch(`${EXPRESS_SERVER}/getProducts?search=${search}`).then((response) => {
+            fetch(`${EXPRESS_SERVER}/getProductModels?search=${search}`).then((response) => {
                 response.json().then((json) => {
                     setProducts(json);
                 })
@@ -19,4 +19,4 @@ const useGetProducts = (search) => {
     return products;
 }
 
-export {useGetProducts}
+export {useGetProductModels}

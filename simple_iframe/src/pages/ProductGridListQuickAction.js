@@ -2,6 +2,7 @@ import {Button, pimTheme, SectionTitle, SkeletonPlaceholder, Table} from "akeneo
 import styled, {ThemeProvider} from "styled-components";
 import React from "react";
 import {useGetProducts} from "../hooks/index.js";
+import {useGetProductModels} from "../hooks/useGetProductModels.js";
 
 const Container = styled.div`
     padding: 20px;
@@ -16,17 +17,18 @@ function ProductGridListQuickAction() {
                 const data = event.data;
                 console.log('Received data from parent postMessage event:', data);
                 if (data && data.filters) {
-                    setSearch(data.filters.productFilters);
+                    setSearch(data.filters);
                 }
             });
         },
         []);
 
-    const products = useGetProducts(search);
+    const products = useGetProducts(search.productFilters);
+    const productModels = useGetProductModels(search.productModelFilters);
 
-    const handleDownload = () => {
+    const handleDownload = (content) => {
         const element = document.createElement('a');
-        const file = new Blob([JSON.stringify(products)], {type: 'text/plain'});
+        const file = new Blob([JSON.stringify(content)], {type: 'text/plain'});
         element.href = URL.createObjectURL(file);
         element.download = 'products.json';
         document.body.appendChild(element);
@@ -39,10 +41,10 @@ function ProductGridListQuickAction() {
             <Container>
                 <SectionTitle>
                     <SectionTitle.Title>
-                        Values
+                        Products
                     </SectionTitle.Title>
                     <SectionTitle.Separator/>
-                    {products && <Button level="primary" onClick={handleDownload}>Download JSON file</Button>}
+                    {products && <Button level="primary" onClick={() => handleDownload(products)}>Download products JSON file</Button>}
                 </SectionTitle>
                 <Table>
                     <Table.Header>
@@ -57,6 +59,33 @@ function ProductGridListQuickAction() {
                             <Table.Cell><SkeletonPlaceholder>Placeholder Family</SkeletonPlaceholder></Table.Cell>
                         </Table.Row>) : products.map((product, i) => <Table.Row key={i}>
                             <Table.Cell>{product.uuid}</Table.Cell>
+                            <Table.Cell>{product.values?.name && product.values.name.length > 0 ? product.values.name[0].data : 'N/A'}</Table.Cell>
+                            <Table.Cell>{product.family}</Table.Cell>
+                        </Table.Row>)}
+                    </Table.Body>
+                </Table>
+            </Container>
+            <Container>
+                <SectionTitle>
+                    <SectionTitle.Title>
+                        Product Models
+                    </SectionTitle.Title>
+                    <SectionTitle.Separator/>
+                    {productModels && <Button level="primary" onClick={() => handleDownload(productModels)}>Download product models JSON file</Button>}
+                </SectionTitle>
+                <Table>
+                    <Table.Header>
+                        <Table.HeaderCell>identifier</Table.HeaderCell>
+                        <Table.HeaderCell>Label</Table.HeaderCell>
+                        <Table.HeaderCell>Family</Table.HeaderCell>
+                    </Table.Header>
+                    <Table.Body>
+                        {typeof productModels === 'undefined' ? [0].map(() => <Table.Row>
+                            <Table.Cell><SkeletonPlaceholder>Placeholder code</SkeletonPlaceholder></Table.Cell>
+                            <Table.Cell><SkeletonPlaceholder>Placeholder label</SkeletonPlaceholder></Table.Cell>
+                            <Table.Cell><SkeletonPlaceholder>Placeholder Family</SkeletonPlaceholder></Table.Cell>
+                        </Table.Row>) : productModels.map((product, i) => <Table.Row key={i}>
+                            <Table.Cell>{product.code}</Table.Cell>
                             <Table.Cell>{product.values?.name && product.values.name.length > 0 ? product.values.name[0].data : 'N/A'}</Table.Cell>
                             <Table.Cell>{product.family}</Table.Cell>
                         </Table.Row>)}

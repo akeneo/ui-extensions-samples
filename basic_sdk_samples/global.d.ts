@@ -1,11 +1,9 @@
-// \AkeneoEnterprise\Connectivity\UiExtension\Infrastructure\Controller\InternalAPI\SdkIframeContentController::getUserInfo
 type PIM_USER = {
   username: string;
   first_name: string;
   last_name: string;
 };
 
-// src/AkeneoEnterprise/Connectivity/UiExtension/back/Infrastructure/Symfony/Resources/public/edit_product_tab_sdk_script.js
 type PIM_CONTEXT = {
   product: {
     uuid: string,
@@ -13,21 +11,87 @@ type PIM_CONTEXT = {
   },
 }
 
-type PIM_SCRIPT_URL = string;
+type Product = {
+  uuid?: string;
+  enabled?: boolean;
+  family?: string;
+  categories?: Array<string>;
+  groups?: Array<string>;
+  parent?: string;
+  values?: { [key: string]: Array<{
+      scope?: string;
+      locale?: string;
+      data?: object;
+      linkedData?: any;
+      attributeType?: string;
+      referenceDataName?: string;
+    }>
+  };
+  associations?: any;
+  quantifiedAssociations?: any;
+  created?: string;
+  updated?: string;
+  metadata?: any;
+  qualityScores?: object;
+  completenesses?: any;
+}
 
 declare global {
   namespace globalThis {
-    var PIM_USER: PIM_USER;
-    var PIM_CONTEXT: PIM_CONTEXT;
-    var PIM_JWT: string;
-    var PIM_HOST: string;
-    var PIM_SCRIPT_URL: PIM_SCRIPT_URL
     var PIM: {
       user: PIM_USER,
       context: PIM_CONTEXT,
       api: {
         products_uuid: {
-          get: (uuid: string) => Promise<Response>,
+          get: (params: {
+            uuid: string;
+            withAttributeOptions?: boolean;
+            withAssetShareLinks?: boolean;
+            withQualityScores?: boolean;
+            withCompletenesses?: boolean;
+          }) => Promise<Product>,
+          list: (params: {
+            search?: string;
+            scope?: string;
+            locales?: string;
+            attributes?: string;
+            paginationType?: 'page' | 'search_after';
+            page?: number;
+            searchAfter?: string;
+            limit?: number;
+            withCount?: boolean;
+            withAttributeOptions?: boolean;
+            withAssetShareLinks?: boolean;
+            withQualityScores?: boolean;
+            withCompletenesses?: boolean;
+          }) => Promise<{
+            links?: {
+              self?: any;
+              first?: any;
+              previous?: any;
+              next?: any;
+            };
+            currentPage?: number;
+            embedded?: {
+              items?: Array<{
+                links?: any;
+                uuid?: string;
+                enabled?: boolean;
+                family?: string;
+                categories?: Array<string>;
+                groups?: Array<string>;
+                parent?: string;
+                values?: { [key: string]: Array<any>; };
+                associations?: any;
+                quantifiedAssociations?: any;
+                created?: string;
+                updated?: string;
+                metadata?: any;
+                qualityScores?: object;
+                completenesses?: Array<any>
+              }>
+            }
+          }>
         }
       },
     }

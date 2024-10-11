@@ -15,6 +15,7 @@ let table = `
       </tr>
     </thead>
     <tbody>`;
+
 Object.keys(product.values).forEach((attributeCode) => {
   product.values[attributeCode].forEach((value) => {
     table += `
@@ -26,6 +27,7 @@ Object.keys(product.values).forEach((attributeCode) => {
       </tr>`;
   });
 });
+
 table += `
     </tbody>
   </table>`;

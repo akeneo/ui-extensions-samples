@@ -51,12 +51,12 @@ It returns:
 - 422 if there is a violation error
 - 400 if JSON is invalid
 
-The `configuration` depends on the `position`. Available positions are `edit_product_tab`, `edit_category_tab` and `edit_product_header`.
+The `configuration` depends on the `position`. Available positions are `edit_product_tab`, `edit_category_tab` and `edit_product_header`, `edit_root_product_model_header`, `edit_sub_product_model_header`.
 For now, the only configuration keys are the same for all the position.
 
 The `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :
 - `simple_iframe` for `edit_product_tab`, `edit_category_tab` and `product_grid_quick_action`
-- `simple_button` for `edit_product_header`
+- `simple_button` for `edit_product_header`, `edit_root_product_model_header` and `edit_sub_product_model_header`
 
 ### url
 

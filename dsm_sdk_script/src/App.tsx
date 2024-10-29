@@ -1,14 +1,17 @@
-import {Link, Placeholder, UsersIllustration} from "akeneo-design-system";
+import * as React from "react";
+import {PIM_SDK} from "../global";
+import {useProduct} from "./useProduct.ts";
 
-function App() {
-  return <Placeholder
-      size={'large'}
-      illustration={<UsersIllustration />}
-      title="Welcome to the SDM SDK starter kit!"
-  >
-    Please update the src/App.tsx file to match your needs!<br/>
-    <Link href="https://dsm.akeneo.com/" target="_blank">Link to the official Akeneo DSM</Link>
-  </Placeholder>
+type AppProps = {
+  PIM: PIM_SDK
+}
+
+const App: React.FC<AppProps> = ({PIM}) => {
+  const product = useProduct(PIM.context.product?.uuid);
+
+  return <>
+    {product && JSON.stringify(product)}
+  </>
 }
 
 export default App

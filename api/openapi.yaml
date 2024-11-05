@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  title: Akeneo PIM UI Extension
+  version: 1.0.0
+  contact: {}
+paths:
+  /api/rest/v1/ui-extension:
+    get:
+      summary: ''
+      description: ''
+      parameters: []
+      operationId: list_extensions
+      tags:
+        - UI Extension
+      responses:
+        default:
+          description: Default response
+  /api/rest/v1/ui-extension/{ui_extension_code}:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        - $ref: "#/components/parameters/ui_extension_code"
+      operationId: get_extension
+      tags:
+        - UI Extension
+      responses:
+        default:
+          description: Default response
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        - $ref: "#/components/parameters/ui_extension_code"
+      operationId: create_extension
+      tags:
+        - UI Extension
+      requestBody:
+        description: |
+          whatever
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/ui_extension_simple_button_body"
+                - $ref: "#/components/schemas/ui_extension_simple_iframe_body"
+              
+      responses:
+        default:
+          description: Default response
+    delete:
+      summary: ''
+      description: ''
+      parameters: []
+      operationId: delete_extension
+      tags:
+        - UI Extension
+      responses:
+        default:
+          description: Default response
+security:
+  - pim_access_token: []
+servers:
+  - url: demo.akeneo.com
+    description: ''
+components:
+  links: {}
+  callbacks: {}
+  parameters: 
+    ui_extension_code:
+      name: code
+      in: path
+      required: true
+      schema:
+        type: string
+        example: my_awesome_button_extension
+  schemas: 
+    ui_extension_simple_button_body:
+      type: object
+      properties:
+        code:
+          type: string
+          example: my_awesome_button_extension
+        position:
+          type: string
+          default: edit_product_header
+          enum: [edit_product_header]
+        type:
+          type: string
+          default: simple_button
+        configuration:
+          type: object
+          properties:
+            url:
+              type: string
+              example: http://www.example.com
+            labels:
+              type: object 
+              properties:
+                en_US:
+                  type: string
+                  example: My awesome button extension
+    ui_extension_simple_iframe_body:
+      type: object
+      properties:
+        code:
+          type: string
+          example: my_awesome_iframe_extension
+        position:
+          type: string
+          default: edit_product_tab
+          enum: [edit_product_tab, edit_category_tab, product_grid_quick_action]
+        type:
+          type: string
+          default: simple_iframe
+        configuration:
+          type: object
+          properties:
+            url:
+              type: string
+              example: http://www.example.com
+            labels:
+              type: object 
+              properties:
+                en_US:
+                  type: string
+                  example: My awesome iFrame extension
+  securitySchemes:
+    pim_access_token:
+      type: apiKey
+      name: access_token
+      in: header

@@ -1,0 +1,13 @@
+# https://taskfile.dev
+# Run in devcontainer
+version: "3"
+
+silent: true
+
+tasks:
+  default:
+    cmds:
+      - task --list
+
+  up:
+    - echo welcome

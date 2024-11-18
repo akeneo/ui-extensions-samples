@@ -6,7 +6,7 @@ const useGetProducts = (search) => {
     const [products, setProducts] = React.useState([]);
 
     React.useEffect(() => {
-        if(search !== '' && search !== '[]') {
+        if(search !== '' && search !== undefined && search !== 'null') {
             fetch(`${EXPRESS_SERVER}/getProducts?search=${search}`).then((response) => {
                 response.json().then((json) => {
                     setProducts(json);

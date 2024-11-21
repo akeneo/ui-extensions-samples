@@ -12,7 +12,7 @@ if (!document.getElementById('root')) {
 ReactDOM.render(
   <StrictMode>
     <ThemeProvider theme={pimTheme}>
-      <App />
+      <App PIM={globalThis.PIM}/>
     </ThemeProvider>
   </StrictMode>,
   document.getElementById('root')

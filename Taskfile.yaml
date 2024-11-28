@@ -9,5 +9,13 @@ tasks:
     cmds:
       - task --list
 
-  up:
-    - echo welcome
+  
+  local:postman-collection:generate:
+    desc: Generate postman collection based on OpenAPI specification
+    cmds:
+      - docker compose run --rm api-tooling sh -cl 'portman --cliOptionsFile api/postman/portman_cli_options.json'
+
+  local:postman-collection:generate:with-sync:
+    desc: Generate postman collection based on OpenAPI specification
+    cmds:
+      - docker compose run --rm api-tooling sh -cl 'portman --cliOptionsFile api/postman/portman_cli_options.json --syncPostman'

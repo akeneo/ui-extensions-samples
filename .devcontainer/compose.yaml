@@ -6,7 +6,7 @@ services:
         - DEV_UID=${DEV_UID:-1000}
         - DEV_GID=${DEV_GID:-1000}
     volumes:
-      - ../../:/workspaces/app:cached
+      - ../:/workspaces/app:cached
     command: sleep infinity
     environment:
       ROOT_DIR: /workspaces/app

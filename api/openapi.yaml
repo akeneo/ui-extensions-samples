@@ -6,7 +6,7 @@ info:
 paths:
   /api/rest/v1/ui-extension:
     get:
-      summary: ''
+      summary: 'List extensions'
       description: ''
       parameters: []
       operationId: list_extensions
@@ -16,23 +16,12 @@ paths:
         default:
           description: Default response
   /api/rest/v1/ui-extension/{ui_extension_code}:
-    get:
-      summary: ''
-      description: ''
-      parameters:
-        - $ref: "#/components/parameters/ui_extension_code"
-      operationId: get_extension
-      tags:
-        - UI Extension
-      responses:
-        default:
-          description: Default response
     post:
-      summary: ''
+      summary: 'Upsert an extension'
       description: ''
       parameters:
         - $ref: "#/components/parameters/ui_extension_code"
-      operationId: create_extension
+      operationId: upsert_extension
       tags:
         - UI Extension
       requestBody:
@@ -50,9 +39,10 @@ paths:
         default:
           description: Default response
     delete:
-      summary: ''
+      summary: 'Delete an extension'
       description: ''
-      parameters: []
+      parameters:
+        - $ref: "#/components/parameters/ui_extension_code"
       operationId: delete_extension
       tags:
         - UI Extension
@@ -69,7 +59,7 @@ components:
   callbacks: {}
   parameters: 
     ui_extension_code:
-      name: code
+      name: ui_extension_code
       in: path
       required: true
       schema:

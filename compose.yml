@@ -1,0 +1,12 @@
+services:
+  api-tooling:
+    build: 
+      dockerfile: ./api/tooling.dockerfile
+      args:
+        DEV_UID: ${DEV_UID:-1000}
+        DEV_GID: ${DEV_UID:-1000}
+    container_name: api-tooling
+    environment:
+      POSTMAN_API_KEY: ${POSTMAN_API_KEY}
+    volumes:
+      - ./api:/workspace/api

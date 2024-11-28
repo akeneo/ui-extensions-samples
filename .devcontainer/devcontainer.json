@@ -3,7 +3,7 @@
 {
   "name": "Akeneo UI Extensions samples",
   "dockerComposeFile": [
-    "../docker/devcontainer/compose.yaml"
+    "./compose.yaml"
   ],
   "service": "devcontainer",
   "workspaceFolder": "/workspaces/app",
@@ -32,7 +32,8 @@
         "redhat.vscode-yaml",
         "task.vscode-task",
         "yzhang.markdown-all-in-one",
-        "postman.postman-for-vscode"
+        "postman.postman-for-vscode",
+        "Redocly.openapi-vs-code"
       ]
     }
   }

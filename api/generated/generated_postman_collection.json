@@ -1,0 +1,217 @@
+{
+  "_": {
+    "postman_id": "07726a97-ae15-43bb-a423-2e65a1043d4e"
+  },
+  "item": [
+    {
+      "id": "cdf80c0e-2625-4151-b8cf-ed18159c9946",
+      "name": "UI Extension",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a40d7ed0-f7b7-465c-a19d-ee8ecac19771",
+          "name": "List extensions",
+          "request": {
+            "name": "List extensions",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "rest",
+                "v1",
+                "ui-extension"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "919abc9a-8120-432e-9c06-d1fca4a8feb0",
+          "name": "Upsert an extension",
+          "request": {
+            "name": "Upsert an extension",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "rest",
+                "v1",
+                "ui-extension",
+                ":ui_extension_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "my_awesome_button_extension",
+                  "key": "ui_extension_code"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"my_awesome_button_extension\",\n  \"position\": \"edit_product_header\",\n  \"type\": \"simple_button\",\n  \"configuration\": {\n    \"url\": \"http://www.example.com\",\n    \"labels\": {\n      \"en_US\": \"My awesome button extension\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8aacf53-43ca-4c3e-870f-e6019e316c5b",
+          "name": "Delete an extension",
+          "request": {
+            "name": "Delete an extension",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "rest",
+                "v1",
+                "ui-extension",
+                ":ui_extension_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "my_awesome_button_extension",
+                  "key": "ui_extension_code"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "type": "string",
+        "value": "{{pim_access_token}}",
+        "key": "token"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "cdb3cd2b-8dbe-4f6d-bbdc-d0eef7fff9c9",
+        "type": "text/javascript",
+        "exec": [
+          "/*\n For simplicity, we acquire a new token before each API call.\n This is not recommended to do the same in production. \n \n Benefit from the 1 hour validity of the access_token and leverage the refresh_token grant type.\n Explore the official PIM API documentation for details https://api.akeneo.com/documentation/authentication.html\n\n*/\n\nappAccessToken = pm.environment.get(\"app_access_token\")\nif (appAccessToken!==undefined) {\n    pm.environment.set(\"pim_access_token\", appAccessToken)\n    console.log(\"Used the token provided in the \\\"app_access_token\\\" variable instead of authenticating with the PIM.\")\n    return\n}\n\nbase64ClientIdSecret = require('btoa')(pm.environment.get(\"clientId\") + ':' + pm.environment.get(\"secret\"))\n\npm.sendRequest({\n    url: pm.environment.get(\"baseUrl\").replace(/\\/$/, '') + '/api/oauth/v1/token',\n    method: 'POST',\n    header: {\n        'Authorization': 'Basic ' + base64ClientIdSecret,\n        'Content-Type': 'application/json',\n    },\n    body: {\n        mode: 'raw',\n        raw: JSON.stringify(\n            {\n                \"username\" : pm.environment.get(\"username\"),\n                \"password\" : pm.environment.get(\"password\"),\n                \"grant_type\": \"password\"\n            }\n        )\n    }\n}, function (err, res) {\n    if(err !== null ){\n        console.error(\"The following error occured during pre-script execution\");\n        console.error(err);\n        return;\n    }\n    console.warn(\"For simplicity, we acquire a new token before each API call, this is not recommended in production. Benefit from the 1 hour validity of the access_token.\");\n    pm.environment.set(\"pim_access_token\", res.json().access_token);\n});"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pim-url.cloud.akeneo.com",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "changeme",
+      "key": "clientId"
+    },
+    {
+      "type": "string",
+      "value": "changeme",
+      "key": "secret"
+    },
+    {
+      "type": "string",
+      "value": "changeme",
+      "key": "username"
+    },
+    {
+      "type": "string",
+      "value": "changeme",
+      "key": "password"
+    }
+  ],
+  "info": {
+    "_postman_id": "07726a97-ae15-43bb-a423-2e65a1043d4e",
+    "name": "Akeneo PIM UI Extension",
+    "version": {
+      "raw": "1.0.0",
+      "major": 1,
+      "minor": 0,
+      "patch": 0,
+      "prerelease": [],
+      "build": [],
+      "string": "1.0.0"
+    },
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

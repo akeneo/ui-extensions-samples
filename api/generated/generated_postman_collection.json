@@ -1,10 +1,10 @@
 {
   "_": {
-    "postman_id": "07726a97-ae15-43bb-a423-2e65a1043d4e"
+    "postman_id": "71a0267d-ba6c-4013-b940-e658de59cfff"
   },
   "item": [
     {
-      "id": "cdf80c0e-2625-4151-b8cf-ed18159c9946",
+      "id": "cbfac6ec-de90-4530-b8c2-85ddd1f047d4",
       "name": "UI Extension",
       "description": {
         "content": "",
@@ -12,7 +12,7 @@
       },
       "item": [
         {
-          "id": "a40d7ed0-f7b7-465c-a19d-ee8ecac19771",
+          "id": "8f09bc74-e7a7-45d9-899f-a4addd9f516a",
           "name": "List extensions",
           "request": {
             "name": "List extensions",
@@ -33,22 +33,41 @@
               "query": [],
               "variable": []
             },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "method": "GET",
             "body": {}
           },
           "response": [],
-          "event": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "60072d5f-1f0c-4a5f-9922-75135c393b94",
+                "type": "text/javascript",
+                "exec": [
+                  "// Validate if response header has matching content-type\npm.test(\"[GET]::/api/rest/v1/ui-extension - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
+                  "// Validate if response has JSON Body \npm.test(\"[GET]::/api/rest/v1/ui-extension - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
+                  "// Response Validation\nconst schema = {\"type\":\"array\",\"description\":\"Represents a list of extensions\",\"items\":{\"anyOf\":[{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_header\",\"enum\":[\"edit_product_header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_tab\",\"enum\":[\"edit_product_tab\",\"edit_category_tab\",\"product_grid_quick_action\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"}}}}}}}]}}\n\n// Validate if response matches JSON schema \npm.test(\"[GET]::/api/rest/v1/ui-extension - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
+                ]
+              }
+            }
+          ],
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           }
         },
         {
-          "id": "919abc9a-8120-432e-9c06-d1fca4a8feb0",
+          "id": "09aec724-48e3-4b49-84e9-0bd983332fa9",
           "name": "Upsert an extension",
           "request": {
             "name": "Upsert an extension",
             "description": {
-              "content": "",
+              "content": "The `configuration` depends on the `position`. Available positions are `edit_product_tab`, `edit_category_tab` and `edit_product_header`.\nFor now, the only configuration keys are the same for all the position.\n\nThe `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :\n- `simple_iframe` for `edit_product_tab`, `edit_category_tab` and `product_grid_quick_action`\n- `simple_button` for `edit_product_header`\n",
               "type": "text/plain"
             },
             "url": {
@@ -101,7 +120,7 @@
           }
         },
         {
-          "id": "c8aacf53-43ca-4c3e-870f-e6019e316c5b",
+          "id": "33956a9e-eea4-4f06-81ba-f8fd9e965112",
           "name": "Delete an extension",
           "request": {
             "name": "Delete an extension",
@@ -138,7 +157,18 @@
             "body": {}
           },
           "response": [],
-          "event": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ac583c12-1301-402f-b922-d30138fe53cc",
+                "type": "text/javascript",
+                "exec": [
+                  "// Validate if response has empty Body \npm.test(\"[DELETE]::/api/rest/v1/ui-extension/:ui_extension_code - Response has empty Body\", function () {\n    pm.response.to.not.be.withBody;\n});\n"
+                ]
+              }
+            }
+          ],
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           }
@@ -161,7 +191,7 @@
     {
       "listen": "prerequest",
       "script": {
-        "id": "cdb3cd2b-8dbe-4f6d-bbdc-d0eef7fff9c9",
+        "id": "17c77586-c93c-45c3-af1d-e9f524695b4c",
         "type": "text/javascript",
         "exec": [
           "/*\n For simplicity, we acquire a new token before each API call.\n This is not recommended to do the same in production. \n \n Benefit from the 1 hour validity of the access_token and leverage the refresh_token grant type.\n Explore the official PIM API documentation for details https://api.akeneo.com/documentation/authentication.html\n\n*/\n\nappAccessToken = pm.environment.get(\"app_access_token\")\nif (appAccessToken!==undefined) {\n    pm.environment.set(\"pim_access_token\", appAccessToken)\n    console.log(\"Used the token provided in the \\\"app_access_token\\\" variable instead of authenticating with the PIM.\")\n    return\n}\n\nbase64ClientIdSecret = require('btoa')(pm.environment.get(\"clientId\") + ':' + pm.environment.get(\"secret\"))\n\npm.sendRequest({\n    url: pm.environment.get(\"baseUrl\").replace(/\\/$/, '') + '/api/oauth/v1/token',\n    method: 'POST',\n    header: {\n        'Authorization': 'Basic ' + base64ClientIdSecret,\n        'Content-Type': 'application/json',\n    },\n    body: {\n        mode: 'raw',\n        raw: JSON.stringify(\n            {\n                \"username\" : pm.environment.get(\"username\"),\n                \"password\" : pm.environment.get(\"password\"),\n                \"grant_type\": \"password\"\n            }\n        )\n    }\n}, function (err, res) {\n    if(err !== null ){\n        console.error(\"The following error occured during pre-script execution\");\n        console.error(err);\n        return;\n    }\n    console.warn(\"For simplicity, we acquire a new token before each API call, this is not recommended in production. Benefit from the 1 hour validity of the access_token.\");\n    pm.environment.set(\"pim_access_token\", res.json().access_token);\n});"
@@ -197,7 +227,7 @@
     }
   ],
   "info": {
-    "_postman_id": "07726a97-ae15-43bb-a423-2e65a1043d4e",
+    "_postman_id": "71a0267d-ba6c-4013-b940-e658de59cfff",
     "name": "Akeneo PIM UI Extension",
     "version": {
       "raw": "1.0.0",

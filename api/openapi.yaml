@@ -13,12 +13,23 @@ paths:
       tags:
         - UI Extension
       responses:
-        default:
-          description: Default response
+        '200':
+          description: |
+            Returns the list of extensions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ui_extension_list_response'
   /api/rest/v1/ui-extension/{ui_extension_code}:
     post:
       summary: 'Upsert an extension'
-      description: ''
+      description: |
+        The `configuration` depends on the `position`. Available positions are `edit_product_tab`, `edit_category_tab` and `edit_product_header`.
+        For now, the only configuration keys are the same for all the position.
+
+        The `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :
+        - `simple_iframe` for `edit_product_tab`, `edit_category_tab` and `product_grid_quick_action`
+        - `simple_button` for `edit_product_header`
       parameters:
         - $ref: "#/components/parameters/ui_extension_code"
       operationId: upsert_extension
@@ -34,10 +45,19 @@ paths:
               oneOf:
                 - $ref: "#/components/schemas/ui_extension_simple_button_body"
                 - $ref: "#/components/schemas/ui_extension_simple_iframe_body"
-              
       responses:
-        default:
-          description: Default response
+        '201':
+          description: |
+            Ui Extension created
+        '204':
+          description: |
+            Ui Extension updated
+        '400':
+          description: |
+            Invalid Json
+        '422':
+          description: |
+            Violation error
     delete:
       summary: 'Delete an extension'
       description: ''
@@ -47,8 +67,12 @@ paths:
       tags:
         - UI Extension
       responses:
-        default:
-          description: Default response
+        '204':
+          description: |
+            Deleted successfuly
+        '404':
+          description: |
+            Extension does not exists
 security:
   - pim_access_token: []
 servers:
@@ -66,6 +90,13 @@ components:
         type: string
         example: my_awesome_button_extension
   schemas: 
+    ui_extension_list_response:
+      type: array
+      description: 'Represents a list of extensions'
+      items: 
+        anyOf: 
+          - $ref: "#/components/schemas/ui_extension_simple_button_body"
+          - $ref: "#/components/schemas/ui_extension_simple_iframe_body"
     ui_extension_simple_button_body:
       type: object
       properties:

@@ -47,6 +47,11 @@ Valid placeholders attributes are:
 - non scopable
 - non localizable
 
+You can add a placeholder anywhere in your url as soon as they're surrounded by `%` symbol.
+Examples:
+- `https://www.google.com/search?q=%name%`
+- `https://yourwebsite.com/%sku%`
+
 ## The parameters accessible by the iFrame
 
 When loading an iframe, several parameters are sent by default as SearchParameters in a GET query, so the server knows who is the connected user (insecure) and in which context the iframe is opened.

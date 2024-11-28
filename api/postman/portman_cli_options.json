@@ -1,0 +1,8 @@
+{
+  "local": "api/openapi.yaml",
+  "output": "api/generated/generated_postman_collection.json",
+  "portmanConfigFile": "api/postman/portman_config.json",
+  "includeTests": true,
+  "syncPostman": false,
+  "runNewman": false
+}

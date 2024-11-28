@@ -1,0 +1,51 @@
+{
+  "version": 1.0,
+  "overwrites": [
+  ],
+  "tests": {
+    "contractTests": [
+      {
+        "openApiOperation": "*::/api/rest/v1/*",
+        "contentType": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/api/rest/v1/*",
+        "jsonBody": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/api/rest/v1/*",
+        "schemaValidation": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/api/rest/v1/*",
+        "headersPresent": {
+          "enabled": true
+        }
+      }
+    ]
+  },
+  "globals": {
+    "stripResponseExamples": true,
+    "collectionVariables": {
+      "baseUrl": "https://pim-url.cloud.akeneo.com",
+      "clientId": "changeme",
+      "secret": "changeme",
+      "username": "changeme",
+      "password": "changeme"
+    },
+    "collectionPreRequestScripts": [
+      "file:./api/postman/pim_auth_prescript.js"
+    ],
+    "securityOverwrites": {
+      "bearer": {
+        "token": "{{pim_access_token}}"
+      }
+    }
+  }
+}

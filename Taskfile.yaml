@@ -1,0 +1,20 @@
+# https://taskfile.dev
+# Run in devcontainer
+version: "3"
+
+silent: true
+
+tasks:
+  default:
+    cmds:
+      - task --list
+
+  local:postman-collection:generate:
+    desc: Generate postman collection based on OpenAPI specification
+    cmds:
+      - docker compose run --rm api-tooling sh -cl 'portman --cliOptionsFile api/postman/portman_cli_options.json'
+
+  local:postman-collection:generate:with-sync:
+    desc: Generate postman collection based on OpenAPI specification
+    cmds:
+      - docker compose run --rm api-tooling sh -cl 'portman --cliOptionsFile api/postman/portman_cli_options.json --syncPostman'

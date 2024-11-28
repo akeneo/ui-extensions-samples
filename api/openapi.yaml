@@ -1,0 +1,154 @@
+openapi: 3.0.0
+info:
+  title: Akeneo PIM UI Extension
+  version: 1.0.0
+  contact: {}
+paths:
+  /api/rest/v1/ui-extension:
+    get:
+      summary: 'List extensions'
+      description: ''
+      parameters: []
+      operationId: list_extensions
+      tags:
+        - UI Extension
+      responses:
+        '200':
+          description: |
+            Returns the list of extensions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ui_extension_list_response'
+  /api/rest/v1/ui-extension/{ui_extension_code}:
+    post:
+      summary: 'Upsert an extension'
+      description: |
+        The `configuration` depends on the `position`. Available positions are `edit_product_tab`, `edit_category_tab` and `edit_product_header`, `edit_root_product_model_header`, `edit_sub_product_model_header`.
+        For now, the only configuration keys are the same for all the position.
+
+        The `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :
+        - `simple_iframe` for `edit_product_tab`, `edit_category_tab` and `product_grid_quick_action`
+        - `simple_button` for `edit_product_header`, `edit_root_product_model_header` and `edit_sub_product_model_header`
+      parameters:
+        - $ref: "#/components/parameters/ui_extension_code"
+      operationId: upsert_extension
+      tags:
+        - UI Extension
+      requestBody:
+        description: |
+          whatever
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/ui_extension_simple_button_body"
+                - $ref: "#/components/schemas/ui_extension_simple_iframe_body"
+      responses:
+        '201':
+          description: |
+            Ui Extension created
+        '204':
+          description: |
+            Ui Extension updated
+        '400':
+          description: |
+            Invalid Json
+        '422':
+          description: |
+            Violation error
+    delete:
+      summary: 'Delete an extension'
+      description: ''
+      parameters:
+        - $ref: "#/components/parameters/ui_extension_code"
+      operationId: delete_extension
+      tags:
+        - UI Extension
+      responses:
+        '204':
+          description: |
+            Deleted successfuly
+        '404':
+          description: |
+            Extension does not exists
+security:
+  - pim_access_token: []
+servers:
+  - url: demo.akeneo.com
+    description: ''
+components:
+  links: {}
+  callbacks: {}
+  parameters: 
+    ui_extension_code:
+      name: ui_extension_code
+      in: path
+      required: true
+      schema:
+        type: string
+        example: my_awesome_button_extension
+  schemas: 
+    ui_extension_list_response:
+      type: array
+      description: 'Represents a list of extensions'
+      items: 
+        anyOf: 
+          - $ref: "#/components/schemas/ui_extension_simple_button_body"
+          - $ref: "#/components/schemas/ui_extension_simple_iframe_body"
+    ui_extension_simple_button_body:
+      type: object
+      properties:
+        code:
+          type: string
+          example: my_awesome_button_extension
+        position:
+          type: string
+          default: edit_product_header
+          enum: [edit_product_header, edit_root_product_model_header, edit_sub_product_model_header]
+        type:
+          type: string
+          default: simple_button
+        configuration:
+          type: object
+          properties:
+            url:
+              type: string
+              example: http://www.example.com
+            labels:
+              type: object 
+              properties:
+                en_US:
+                  type: string
+                  example: My awesome button extension
+    ui_extension_simple_iframe_body:
+      type: object
+      properties:
+        code:
+          type: string
+          example: my_awesome_iframe_extension
+        position:
+          type: string
+          default: edit_product_tab
+          enum: [edit_product_tab, edit_category_tab, product_grid_quick_action]
+        type:
+          type: string
+          default: simple_iframe
+        configuration:
+          type: object
+          properties:
+            url:
+              type: string
+              example: http://www.example.com
+            labels:
+              type: object 
+              properties:
+                en_US:
+                  type: string
+                  example: My awesome iFrame extension
+  securitySchemes:
+    pim_access_token:
+      type: apiKey
+      name: access_token
+      in: header

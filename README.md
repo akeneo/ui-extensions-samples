@@ -32,9 +32,24 @@ The [openapi specification](./api/openapi.yaml) describe how to use this API.
 The prefered way of testing out this API is by using the [Postman Collection](./api/generated/generated_postman_collection.json)
 Import the collection and the [postman environment template](./api/postman/postman_environment_template.json) into postman, then fill the environment variable.
 
-# The UI Extension parameters
+# Enhanced context
 
-When loading an iframe, several parameters are send as SearchParameters in a GET query, so the server knows who is the connected user (insecure) and in which context the iframe is opened.
+## Query parameters placeholders
+
+You can ask for specific values to construct the urls thanks to a specific placeholder pattern. Let's take an example:
+
+You want to configure a `simple_button` to open Google Shopping with a search filtered on the product you're on by it's name.
+
+You can configure a UI Extension with the following url `https://www.google.com/search?q=%name%&tbm=shop&gl=us`, then we will dynamically put the value of the attribute code `name` when the user will click on the simple button.
+
+Valid placeholders attributes are:
+- attribute of type: `identifier` & `text` only
+- non scopable
+- non localizable
+
+## The parameters accessible by the iFrame
+
+When loading an iframe, several parameters are sent by default as SearchParameters in a GET query, so the server knows who is the connected user (insecure) and in which context the iframe is opened.
 
 For example, when `url` is `https://customerwebsite.com/iframe/`, the called URL is `https://customerwebite.com/iframe/?paramA=valueA&paramB=valueB`
 
@@ -51,6 +66,8 @@ For `edit_product_tab` position, these parameters are sent:
 
 For `edit_category_tab` position, this parameter is sent:
 - `category[code]`
+
+## The specificities of the grid quick action
 
 For `product_grid_quick_action` position, an object is sent by the parent iframe with a [postMessage JS event](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage):
 ```json

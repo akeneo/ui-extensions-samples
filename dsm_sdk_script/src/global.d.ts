@@ -1802,6 +1802,10 @@ export declare type PIM_CONTEXT = {
         uuid: string;
         identifier: string | null;
     };
+} | {
+    category: {
+        code: string;
+    };
 };
 
 export declare type PIM_SDK = {

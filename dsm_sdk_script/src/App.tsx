@@ -1,10 +1,12 @@
 import {Link, Placeholder, SectionTitle, UsersIllustration} from "akeneo-design-system";
 import {useGetProduct} from "./useGetProduct.ts";
+import {useGetCategory} from "./useGetCategory.ts";
 
 function App() {
   const PIMContext = globalThis.PIM.context;
   const PIMUser = globalThis.PIM.user
-  const currentProduct = useGetProduct(PIMContext.product.uuid);
+  const currentProduct = useGetProduct('product' in PIMContext ? PIMContext.product.uuid : undefined);
+  const currentCategory = useGetCategory('category' in PIMContext ? PIMContext.category.code : undefined);
 
   return <>
     <Placeholder
@@ -26,7 +28,8 @@ function App() {
     <SectionTitle>
       <SectionTitle.Title>Current object properties</SectionTitle.Title>
     </SectionTitle>
-    <pre>{currentProduct && JSON.stringify(currentProduct, null, 4)}</pre>
+    {currentProduct && <pre>{JSON.stringify(currentProduct, null, 4)}</pre>}
+    {currentCategory && <pre>{JSON.stringify(currentCategory, null, 4)}</pre>}
   </>
 }
 

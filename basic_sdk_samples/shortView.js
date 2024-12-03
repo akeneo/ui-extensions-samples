@@ -3,7 +3,7 @@ const productUuid = globalThis.PIM.context.product.uuid;
 
 document.body.innerHTML = '';
 
-const product = await globalThis.PIM.api.products_uuid.get({uuid: productUuid})
+const product = await globalThis.PIM.api.product_uuid.get({uuid: productUuid})
 let table = `
   <table>
     <thead>

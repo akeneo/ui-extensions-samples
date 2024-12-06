@@ -1,13 +1,17 @@
 openapi: 3.0.0
 info:
   title: Akeneo PIM UI Extension
+  description: Akeneo PIM UI extension endpoint manipulation
   version: 1.0.0
   contact: {}
+tags: 
+  - name: UI Extension 
+    description: Manipulate UI Extensions
 paths:
   /api/rest/v1/ui-extension:
     get:
       summary: 'List extensions'
-      description: ''
+      description: 'List all extensions associated with your token'
       parameters: []
       operationId: list_extensions
       tags:
@@ -60,7 +64,7 @@ paths:
             Violation error
     delete:
       summary: 'Delete an extension'
-      description: ''
+      description: 'Delete an extension'
       parameters:
         - $ref: "#/components/parameters/ui_extension_code"
       operationId: delete_extension
@@ -115,13 +119,19 @@ components:
           properties:
             url:
               type: string
-              example: http://www.example.com
+              example: https://www.example.com
+            default_label:
+              type: string
+              example: My awesome button extension
             labels:
               type: object 
               properties:
                 en_US:
                   type: string
                   example: My awesome button extension
+                fr_FR:
+                  type: string
+                  example: Ma super button extension
     ui_extension_simple_iframe_body:
       type: object
       properties:
@@ -140,13 +150,19 @@ components:
           properties:
             url:
               type: string
-              example: http://www.example.com
+              example: https://www.example.com
+            default_label:
+              type: string
+              example: My awesome iFrame extension
             labels:
               type: object 
               properties:
                 en_US:
                   type: string
                   example: My awesome iFrame extension
+                fr_FR:
+                  type: string
+                  example: Ma super iFrame extension
   securitySchemes:
     pim_access_token:
       type: apiKey

@@ -53,7 +53,7 @@ function ContextPropagation() {
                     <li>- realize actions on the correct context</li>
                 </ul>
                 <br/>
-                Change the scope and/or locale of the product you're on and see the context updated in this page.
+                Change the scope and/or locale of the product you&apos;re on and see the context updated in this page.
                 </Information>
             </div>
             <div>

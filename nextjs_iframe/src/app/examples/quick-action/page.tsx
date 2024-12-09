@@ -59,7 +59,7 @@ function ContextPropagation() {
                 title="Listen to pim context propagation"
                 >
                 Pim product grid is contextualized by a scope and a locale.<br/><br/>
-                With an iFrame dealing with product grid data, you'll also receive the product selection with a window.postMessage event.                
+                With an iFrame dealing with product grid data, you&apos;ll also receive the product selection with a window.postMessage event.                
                 </Information>
             </div>
             <div>

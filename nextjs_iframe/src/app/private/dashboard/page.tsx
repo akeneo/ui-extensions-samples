@@ -6,7 +6,8 @@ import { useCookies } from 'react-cookie';
 
 function ContextPropagation() {
 
-    const router = useRouter()
+    const router = useRouter();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [cookies, setCookie] = useCookies(['weak-session']);
 
     const handleLogout = () => {
@@ -21,13 +22,13 @@ function ContextPropagation() {
                 illustration={<UsersIllustration />}
                 title="You're authenticated !"
                 >
-                    This page illustrate the fact that you have to restrict access to the web page you're displaying.
+                    This page illustrate the fact that you have to restrict access to the web page you&apos;re displaying.
                     <br/><br/>
                     Using the logout button will redirect you to the login page. You can access this page without proper authentication.
                 </Information>
             </div>
             <br/><br/>
-            <div>Welcome dear connected user, you're navigating a page which needs to be authenticated.</div>
+            <div>Welcome dear connected user, you&apos;re navigating a page which needs to be authenticated.</div>
             <br/><br/>
             <Button level="danger" onClick={handleLogout}>
                 Logout

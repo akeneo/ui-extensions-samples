@@ -10,7 +10,8 @@ export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-
+    
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [cookies, setCookie] = useCookies(['weak-session']);
 
     const handleLogin = () => {
@@ -36,10 +37,10 @@ export default function Login() {
                     illustration={<UsersIllustration />}
                     title="Access an authenticated remote service"
                     >
-                        Displaying iFrame content within the PIM should require to be authenticated by the remote server as you don't want this content to be publicly accessible over internet.<br/><br/>
+                        Displaying iFrame content within the PIM should require to be authenticated by the remote server as you don&apos;t want this content to be publicly accessible over internet.<br/><br/>
                         You can provide a dedicated login screen to let the user fill its credentials or benefit from your enterprise SSO capabilities.<br/><br/>
-                        If you're displaying the content of <Link href="https://api.akeneo.com/apps/overview.html" target="_blank">an App or a Custom App</Link> you will benefit from <Link href="https://api.akeneo.com/apps/authentication-and-authorization.html#getting-started-with-openid-connect" target="_blank">the seamless user authentication</Link> thanks to the OpenID Connect protocol.<br/><br/>
-                        For the sake of the example, you can use "admin/password" as credentials to simulate the access to the private content of this iFrame.
+                        If you&apos;re displaying the content of <Link href="https://api.akeneo.com/apps/overview.html" target="_blank">an App or a Custom App</Link> you will benefit from <Link href="https://api.akeneo.com/apps/authentication-and-authorization.html#getting-started-with-openid-connect" target="_blank">the seamless user authentication</Link> thanks to the OpenID Connect protocol.<br/><br/>
+                        For the sake of the example, you can use &quot;admin/password&quot; as credentials to simulate the access to the private content of this iFrame.
                     </Information>
                 </div>
                 <div className="flex justify-center items-center h-screen">

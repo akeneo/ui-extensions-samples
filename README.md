@@ -16,16 +16,6 @@ This application example gives access to 4 features:
 
 Please read the [README.md](./simple_iframe/README.md) in the simple_iframe folder.
 
-## Expose local webserver within iFrames
-
-Only `https` endpoint are allowed to be configured.
-If you need to test/develop with a local webserver ensure to use a service like ngrok to expose a valid tls termination.
-
-Good to know: you can now redeem a static domain to keep your configuration working even after a restart of the tunnel
-
-![ngrok redeem static domain](doc/img/ngrok_static_domain.png)
-
-
 ## DSM SDK script example
 
 This folder contains a minimal example for the SDK Script feature, including the Akeneo DSM.
@@ -84,7 +74,9 @@ For `edit_category_tab` position, this parameter is sent:
 
 ## The specificities of the grid quick action
 
-For `product_grid_quick_action` position, an object is sent by the parent iframe with a [postMessage JS event](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage):
+For `product_grid_quick_action` position, an object is sent by the parent to the iframe with a [postMessage JS event](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage):
+
+The following data is subject to change, we will make it evolve and should perceived as an "API contract" between the PIM and the system listening to those events.
 ```json
 {
   "filters": {
@@ -107,3 +99,4 @@ For `product_grid_quick_action` position, an object is sent by the parent iframe
   }
 }
 ```
+![illustrated window postmessage](doc/img/window.postmessage.png)

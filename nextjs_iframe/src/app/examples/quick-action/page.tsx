@@ -1,6 +1,6 @@
 "use client"
 
-import { Badge, Helper, Information, Locale, UsersIllustration } from 'akeneo-design-system';
+import { Badge, Helper, Information, Link, Locale, UsersIllustration } from 'akeneo-design-system';
 import React, { useState } from 'react';
 
 function ContextPropagation() {
@@ -52,14 +52,14 @@ function ContextPropagation() {
 
     return (
         <>
-            {(window.location === window.parent.location) ? <Helper level="error">In order to work properly, this page must be rendered as an iFrame at a quick_action to benefit from the window.postMessage events</Helper> : <></>}
+            {(window.location === window.parent.location) ? <Helper level="error">In order to work properly, this page must be rendered as an iFrame at a quick_action position to benefit from the window.postMessage events</Helper> : <></>}
             <div>
                 <Information
                 illustration={<UsersIllustration />}
                 title="Listen to pim context propagation"
                 >
                 Pim product grid is contextualized by a scope and a locale.<br/><br/>
-                With an iFrame dealing with product grid data, you&apos;ll also receive the product selection with a window.postMessage event.                
+                With an iFrame dealing with product grid data, you&apos;ll also receive the product selection with a <Link href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage" target="_blank">window.postMessage</Link> event.
                 </Information>
             </div>
             <div>

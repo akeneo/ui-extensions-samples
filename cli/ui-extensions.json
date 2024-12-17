@@ -1,0 +1,50 @@
+[
+    {
+        "code": "extension_with_dsm",
+        "type": "simple_iframe",
+        "position": "edit_product_tab",
+        "configuration": {
+            "url": "http://localhost:3000",
+            "labels": {
+                "en_US": "My custom app"
+            },
+            "default_label": "My custom app"
+        }
+    },
+    {
+        "code": "google_shopping_search",
+        "type": "simple_button",
+        "position": "edit_product_header",
+        "configuration": {
+            "url": "https://www.google.com/search?q=%name%&tbm=shop&gl=us",
+            "labels": {
+                "en_US": "Search in ggshoping"
+            },
+            "default_label": "Search in ggshoping"
+        }
+    },
+    {
+        "code": "no_code_action",
+        "type": "simple_button",
+        "position": "edit_product_header",
+        "configuration": {
+            "url": "https://eoq2ylr8m527jdg.m.pipedream.net?token=1234&product[uuid]=%uuid%&product[identifier]=%sku%",
+            "labels": {
+                "en_US": "Custom no-code action"
+            },
+            "default_label": "Custom no-code action"
+        }
+    },
+    {
+        "code": "ui_ext_doculians",
+        "type": "simple_iframe",
+        "position": "product_grid_quick_action",
+        "configuration": {
+            "url": "http://localhost:3000/examples/quick-action",
+            "labels": {
+                "en_US": "Doculians PDF"
+            },
+            "default_label": "Doculians PDF"
+        }
+    }
+]

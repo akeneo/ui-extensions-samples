@@ -12,7 +12,7 @@ function ContextPropagation() {
 
     const handleLogout = () => {
         console.log('logout')
-        setCookie('weak-session', false, {path:'/private', maxAge: 0, sameSite: "none"});
+        setCookie('weak-session', false, {path:'/private', maxAge: 0, sameSite: "none", secure: true});
         router.push('/private/login');
     };
     return (

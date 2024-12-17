@@ -22,7 +22,7 @@ export default function Login() {
 
             //Weak example of considering a user is "logged" using script useable cookie.
             //Do not implement it this way for production usage.
-            setCookie('weak-session', true, {path: '/private', sameSite: "none"});
+            setCookie('weak-session', true, {path: '/private', sameSite: "none", secure: true});
             router.push('/private/dashboard');
         } else {
             setError('Invalid username or password');
@@ -31,7 +31,7 @@ export default function Login() {
 
     return (
         <>
-            <CookiesProvider defaultSetOptions={{ path: '/private' }}>
+            <CookiesProvider>
                 <div>
                     <Information
                     illustration={<UsersIllustration />}

@@ -1,10 +1,10 @@
 {
   "_": {
-    "postman_id": "e5652b4a-3465-4766-843f-b68c7f380aa8"
+    "postman_id": "e3cbfd5a-aaa1-48f2-96a5-f0efe41c9052"
   },
   "item": [
     {
-      "id": "5006b097-979e-49bc-9ca8-c93340656a8d",
+      "id": "3af99f03-1409-4eed-b424-2f8f6add1a4d",
       "name": "UI Extension",
       "description": {
         "content": "Manipulate UI Extensions",
@@ -12,7 +12,7 @@
       },
       "item": [
         {
-          "id": "a60bd8e3-9f94-4955-93c4-91b34712d547",
+          "id": "565c0995-2573-47dc-a4bd-c6761effa4a2",
           "name": "List extensions",
           "request": {
             "name": "List extensions",
@@ -25,7 +25,7 @@
                 "api",
                 "rest",
                 "v1",
-                "ui-extension"
+                "ui-extensions"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -47,12 +47,12 @@
             {
               "listen": "test",
               "script": {
-                "id": "5d6b908b-6554-47ed-ba7a-a0aa9c3bf138",
+                "id": "1117a9e3-5535-450b-abf7-563c497e0502",
                 "type": "text/javascript",
                 "exec": [
-                  "// Validate if response header has matching content-type\npm.test(\"[GET]::/api/rest/v1/ui-extension - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
-                  "// Validate if response has JSON Body \npm.test(\"[GET]::/api/rest/v1/ui-extension - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
-                  "// Response Validation\nconst schema = {\"type\":\"array\",\"description\":\"Represents a list of extensions\",\"items\":{\"anyOf\":[{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_header\",\"enum\":[\"edit_product_header\",\"edit_root_product_model_header\",\"edit_sub_product_model_header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_tab\",\"enum\":[\"edit_product_tab\",\"edit_category_tab\",\"product_grid_quick_action\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}}\n\n// Validate if response matches JSON schema \npm.test(\"[GET]::/api/rest/v1/ui-extension - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
+                  "// Validate if response header has matching content-type\npm.test(\"[GET]::/api/rest/v1/ui-extensions - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
+                  "// Validate if response has JSON Body \npm.test(\"[GET]::/api/rest/v1/ui-extensions - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
+                  "// Response Validation\nconst schema = {\"type\":\"array\",\"description\":\"Represents a list of extensions\",\"items\":{\"anyOf\":[{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_header\",\"enum\":[\"edit_product_header\",\"edit_root_product_model_header\",\"edit_sub_product_model_header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_tab\",\"enum\":[\"edit_product_tab\",\"edit_category_tab\",\"product_grid_quick_action\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}}\n\n// Validate if response matches JSON schema \npm.test(\"[GET]::/api/rest/v1/ui-extensions - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
                 ]
               }
             }
@@ -62,7 +62,7 @@
           }
         },
         {
-          "id": "8b48cba0-fce3-4b2b-8413-18dc1df04ba4",
+          "id": "9afc2c9c-1d0b-40a6-b15b-b5f695cf100a",
           "name": "Add an extension",
           "request": {
             "name": "Add an extension",
@@ -75,7 +75,7 @@
                 "api",
                 "rest",
                 "v1",
-                "ui-extension"
+                "ui-extensions"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -110,12 +110,12 @@
             {
               "listen": "test",
               "script": {
-                "id": "c1a32042-ce1b-4eca-83eb-397062fdcf7c",
+                "id": "29a18c56-f66e-49c7-b1c4-5bc8d6df9fab",
                 "type": "text/javascript",
                 "exec": [
-                  "// Validate if response header has matching content-type\npm.test(\"[POST]::/api/rest/v1/ui-extension - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
-                  "// Validate if response has JSON Body \npm.test(\"[POST]::/api/rest/v1/ui-extension - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
-                  "// Response Validation\nconst schema = {\"oneOf\":[{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_header\",\"enum\":[\"edit_product_header\",\"edit_root_product_model_header\",\"edit_sub_product_model_header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_tab\",\"enum\":[\"edit_product_tab\",\"edit_category_tab\",\"product_grid_quick_action\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}\n\n// Validate if response matches JSON schema \npm.test(\"[POST]::/api/rest/v1/ui-extension - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
+                  "// Validate if response header has matching content-type\npm.test(\"[POST]::/api/rest/v1/ui-extensions - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
+                  "// Validate if response has JSON Body \npm.test(\"[POST]::/api/rest/v1/ui-extensions - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
+                  "// Response Validation\nconst schema = {\"oneOf\":[{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_header\",\"enum\":[\"edit_product_header\",\"edit_root_product_model_header\",\"edit_sub_product_model_header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_tab\",\"enum\":[\"edit_product_tab\",\"edit_category_tab\",\"product_grid_quick_action\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}\n\n// Validate if response matches JSON schema \npm.test(\"[POST]::/api/rest/v1/ui-extensions - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
                 ]
               }
             }
@@ -125,7 +125,7 @@
           }
         },
         {
-          "id": "629093e2-0871-4cd6-8584-b04c6e137a7b",
+          "id": "31463f6f-18c0-4866-a27a-b5634635e4cf",
           "name": "Update an extension",
           "request": {
             "name": "Update an extension",
@@ -138,7 +138,7 @@
                 "api",
                 "rest",
                 "v1",
-                "ui-extension",
+                "ui-extensions",
                 ":ui_extension_uuid"
               ],
               "host": [
@@ -185,12 +185,12 @@
             {
               "listen": "test",
               "script": {
-                "id": "3f7b8ad0-50dc-431b-8931-514e99b78d66",
+                "id": "a7944a70-23fd-4465-b912-e4d3715e149a",
                 "type": "text/javascript",
                 "exec": [
-                  "// Validate if response header has matching content-type\npm.test(\"[PATCH]::/api/rest/v1/ui-extension/:ui_extension_uuid - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
-                  "// Validate if response has JSON Body \npm.test(\"[PATCH]::/api/rest/v1/ui-extension/:ui_extension_uuid - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
-                  "// Response Validation\nconst schema = {\"oneOf\":[{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_header\",\"enum\":[\"edit_product_header\",\"edit_root_product_model_header\",\"edit_sub_product_model_header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_tab\",\"enum\":[\"edit_product_tab\",\"edit_category_tab\",\"product_grid_quick_action\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}\n\n// Validate if response matches JSON schema \npm.test(\"[PATCH]::/api/rest/v1/ui-extension/:ui_extension_uuid - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
+                  "// Validate if response header has matching content-type\npm.test(\"[PATCH]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
+                  "// Validate if response has JSON Body \npm.test(\"[PATCH]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
+                  "// Response Validation\nconst schema = {\"oneOf\":[{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_header\",\"enum\":[\"edit_product_header\",\"edit_root_product_model_header\",\"edit_sub_product_model_header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_tab\",\"enum\":[\"edit_product_tab\",\"edit_category_tab\",\"product_grid_quick_action\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}\n\n// Validate if response matches JSON schema \npm.test(\"[PATCH]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
                 ]
               }
             }
@@ -200,7 +200,7 @@
           }
         },
         {
-          "id": "cb5f9127-2b4e-4d71-8e7f-63770626d531",
+          "id": "8e57de99-896e-4157-a95e-94c82f036b2d",
           "name": "Delete an extension",
           "request": {
             "name": "Delete an extension",
@@ -213,7 +213,7 @@
                 "api",
                 "rest",
                 "v1",
-                "ui-extension",
+                "ui-extensions",
                 ":ui_extension_uuid"
               ],
               "host": [
@@ -241,10 +241,10 @@
             {
               "listen": "test",
               "script": {
-                "id": "00112d75-f885-4c37-8e4a-9a4afc423482",
+                "id": "a01fa080-70e4-46be-99bb-a82c9899be4f",
                 "type": "text/javascript",
                 "exec": [
-                  "// Validate if response has empty Body \npm.test(\"[DELETE]::/api/rest/v1/ui-extension/:ui_extension_uuid - Response has empty Body\", function () {\n    pm.response.to.not.be.withBody;\n});\n"
+                  "// Validate if response has empty Body \npm.test(\"[DELETE]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Response has empty Body\", function () {\n    pm.response.to.not.be.withBody;\n});\n"
                 ]
               }
             }
@@ -271,7 +271,7 @@
     {
       "listen": "prerequest",
       "script": {
-        "id": "a9d93374-14aa-43e9-8cd4-0b1b57310376",
+        "id": "4eb7510a-1e0f-4945-9e58-704212198349",
         "type": "text/javascript",
         "exec": [
           "/*\n For simplicity, we acquire a new token before each API call.\n This is not recommended to do the same in production. \n \n Benefit from the 1 hour validity of the access_token and leverage the refresh_token grant type.\n Explore the official PIM API documentation for details https://api.akeneo.com/documentation/authentication.html\n\n*/\n\nappAccessToken = pm.environment.get(\"app_access_token\")\nif (appAccessToken!==undefined) {\n    pm.environment.set(\"pim_access_token\", appAccessToken)\n    console.log(\"Used the token provided in the \\\"app_access_token\\\" variable instead of authenticating with the PIM.\")\n    return\n}\n\nbase64ClientIdSecret = require('btoa')(pm.environment.get(\"clientId\") + ':' + pm.environment.get(\"secret\"))\n\npm.sendRequest({\n    url: pm.environment.get(\"baseUrl\").replace(/\\/$/, '') + '/api/oauth/v1/token',\n    method: 'POST',\n    header: {\n        'Authorization': 'Basic ' + base64ClientIdSecret,\n        'Content-Type': 'application/json',\n    },\n    body: {\n        mode: 'raw',\n        raw: JSON.stringify(\n            {\n                \"username\" : pm.environment.get(\"username\"),\n                \"password\" : pm.environment.get(\"password\"),\n                \"grant_type\": \"password\"\n            }\n        )\n    }\n}, function (err, res) {\n    if(err !== null ){\n        console.error(\"The following error occured during pre-script execution\");\n        console.error(err);\n        return;\n    }\n    console.warn(\"For simplicity, we acquire a new token before each API call, this is not recommended in production. Benefit from the 1 hour validity of the access_token.\");\n    pm.environment.set(\"pim_access_token\", res.json().access_token);\n});"
@@ -307,7 +307,7 @@
     }
   ],
   "info": {
-    "_postman_id": "e5652b4a-3465-4766-843f-b68c7f380aa8",
+    "_postman_id": "e3cbfd5a-aaa1-48f2-96a5-f0efe41c9052",
     "name": "Akeneo PIM UI Extension",
     "version": {
       "raw": "1.0.0",

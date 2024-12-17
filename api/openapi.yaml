@@ -8,7 +8,7 @@ tags:
   - name: UI Extension 
     description: Manipulate UI Extensions
 paths:
-  /api/rest/v1/ui-extension:
+  /api/rest/v1/ui-extensions:
     get:
       summary: 'List extensions'
       description: 'List all extensions associated with your token'
@@ -62,7 +62,7 @@ paths:
         '422':
           description: |
             Violation error
-  /api/rest/v1/ui-extension/{ui_extension_uuid}:
+  /api/rest/v1/ui-extensions/{ui_extension_uuid}:
     patch:
       summary: 'Update an extension'
       description: |

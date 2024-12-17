@@ -11,3 +11,4 @@ services:
     environment:
       ROOT_DIR: /workspaces/app
       POSTMAN_API_KEY: ${POSTMAN_API_KEY}
+    network_mode: host

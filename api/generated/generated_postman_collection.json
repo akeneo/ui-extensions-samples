@@ -1,10 +1,10 @@
 {
   "_": {
-    "postman_id": "7bac4606-639d-436b-a17d-7fcdde733aa3"
+    "postman_id": "e3cbfd5a-aaa1-48f2-96a5-f0efe41c9052"
   },
   "item": [
     {
-      "id": "af18048a-a974-4ac4-aba8-e1de0662d891",
+      "id": "3af99f03-1409-4eed-b424-2f8f6add1a4d",
       "name": "UI Extension",
       "description": {
         "content": "Manipulate UI Extensions",
@@ -12,7 +12,7 @@
       },
       "item": [
         {
-          "id": "ba7d2415-5863-4724-b02b-284641d92f56",
+          "id": "565c0995-2573-47dc-a4bd-c6761effa4a2",
           "name": "List extensions",
           "request": {
             "name": "List extensions",
@@ -25,7 +25,7 @@
                 "api",
                 "rest",
                 "v1",
-                "ui-extension"
+                "ui-extensions"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -47,12 +47,12 @@
             {
               "listen": "test",
               "script": {
-                "id": "38f2ce57-3d8d-4dba-9d2e-d22e90893941",
+                "id": "1117a9e3-5535-450b-abf7-563c497e0502",
                 "type": "text/javascript",
                 "exec": [
-                  "// Validate if response header has matching content-type\npm.test(\"[GET]::/api/rest/v1/ui-extension - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
-                  "// Validate if response has JSON Body \npm.test(\"[GET]::/api/rest/v1/ui-extension - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
-                  "// Response Validation\nconst schema = {\"type\":\"array\",\"description\":\"Represents a list of extensions\",\"items\":{\"anyOf\":[{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_header\",\"enum\":[\"edit_product_header\",\"edit_root_product_model_header\",\"edit_sub_product_model_header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_tab\",\"enum\":[\"edit_product_tab\",\"edit_category_tab\",\"product_grid_quick_action\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}}\n\n// Validate if response matches JSON schema \npm.test(\"[GET]::/api/rest/v1/ui-extension - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
+                  "// Validate if response header has matching content-type\npm.test(\"[GET]::/api/rest/v1/ui-extensions - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
+                  "// Validate if response has JSON Body \npm.test(\"[GET]::/api/rest/v1/ui-extensions - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
+                  "// Response Validation\nconst schema = {\"type\":\"array\",\"description\":\"Represents a list of extensions\",\"items\":{\"anyOf\":[{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_header\",\"enum\":[\"edit_product_header\",\"edit_root_product_model_header\",\"edit_sub_product_model_header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_tab\",\"enum\":[\"edit_product_tab\",\"edit_category_tab\",\"product_grid_quick_action\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}}\n\n// Validate if response matches JSON schema \npm.test(\"[GET]::/api/rest/v1/ui-extensions - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
                 ]
               }
             }
@@ -62,10 +62,10 @@
           }
         },
         {
-          "id": "7ce232eb-772d-413a-93f8-e870a9407207",
-          "name": "Upsert an extension",
+          "id": "9afc2c9c-1d0b-40a6-b15b-b5f695cf100a",
+          "name": "Add an extension",
           "request": {
-            "name": "Upsert an extension",
+            "name": "Add an extension",
             "description": {
               "content": "The `configuration` depends on the `position`. Available positions are `edit_product_tab`, `edit_category_tab` and `edit_product_header`, `edit_root_product_model_header`, `edit_sub_product_model_header`.\nFor now, the only configuration keys are the same for all the position.\n\nThe `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :\n- `simple_iframe` for `edit_product_tab`, `edit_category_tab` and `product_grid_quick_action`\n- `simple_button` for `edit_product_header`, `edit_root_product_model_header` and `edit_sub_product_model_header`\n",
               "type": "text/plain"
@@ -75,8 +75,71 @@
                 "api",
                 "rest",
                 "v1",
-                "ui-extension",
-                ":ui_extension_code"
+                "ui-extensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"my_awesome_button_extension\",\n  \"position\": \"edit_product_header\",\n  \"type\": \"simple_button\",\n  \"configuration\": {\n    \"url\": \"https://www.example.com\",\n    \"default_label\": \"My awesome button extension\",\n    \"labels\": {\n      \"en_US\": \"My awesome button extension\",\n      \"fr_FR\": \"Ma super button extension\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "29a18c56-f66e-49c7-b1c4-5bc8d6df9fab",
+                "type": "text/javascript",
+                "exec": [
+                  "// Validate if response header has matching content-type\npm.test(\"[POST]::/api/rest/v1/ui-extensions - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
+                  "// Validate if response has JSON Body \npm.test(\"[POST]::/api/rest/v1/ui-extensions - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
+                  "// Response Validation\nconst schema = {\"oneOf\":[{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_header\",\"enum\":[\"edit_product_header\",\"edit_root_product_model_header\",\"edit_sub_product_model_header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_tab\",\"enum\":[\"edit_product_tab\",\"edit_category_tab\",\"product_grid_quick_action\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}\n\n// Validate if response matches JSON schema \npm.test(\"[POST]::/api/rest/v1/ui-extensions - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
+                ]
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31463f6f-18c0-4866-a27a-b5634635e4cf",
+          "name": "Update an extension",
+          "request": {
+            "name": "Update an extension",
+            "description": {
+              "content": "The `configuration` depends on the `position`. Available positions are `edit_product_tab`, `edit_category_tab` and `edit_product_header`, `edit_root_product_model_header`, `edit_sub_product_model_header`.\nFor now, the only configuration keys are the same for all the position.\n\nThe `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :\n- `simple_iframe` for `edit_product_tab`, `edit_category_tab` and `product_grid_quick_action`\n- `simple_button` for `edit_product_header`, `edit_root_product_model_header` and `edit_sub_product_model_header`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "rest",
+                "v1",
+                "ui-extensions",
+                ":ui_extension_uuid"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -90,8 +153,8 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "my_awesome_button_extension",
-                  "key": "ui_extension_code"
+                  "value": "e175d525-8fbf-4b26-9242-1daccf301f8b",
+                  "key": "ui_extension_uuid"
                 }
               ]
             },
@@ -99,12 +162,16 @@
               {
                 "key": "Content-Type",
                 "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
               }
             ],
-            "method": "POST",
+            "method": "PATCH",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"code\": \"my_awesome_button_extension\",\n  \"position\": \"edit_product_header\",\n  \"type\": \"simple_button\",\n  \"configuration\": {\n    \"url\": \"http://www.example.com\",\n    \"default_label\": \"My awesome button extension\",\n    \"labels\": {\n      \"en_US\": \"My awesome button extension\",\n      \"fr_FR\": \"Ma super button extension\"\n    }\n  }\n}",
+              "raw": "{\n  \"code\": \"my_awesome_button_extension\",\n  \"position\": \"edit_product_header\",\n  \"type\": \"simple_button\",\n  \"configuration\": {\n    \"url\": \"https://www.example.com\",\n    \"default_label\": \"My awesome button extension\",\n    \"labels\": {\n      \"en_US\": \"My awesome button extension\",\n      \"fr_FR\": \"Ma super button extension\"\n    }\n  }\n}",
               "options": {
                 "raw": {
                   "headerFamily": "json",
@@ -114,13 +181,26 @@
             }
           },
           "response": [],
-          "event": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a7944a70-23fd-4465-b912-e4d3715e149a",
+                "type": "text/javascript",
+                "exec": [
+                  "// Validate if response header has matching content-type\npm.test(\"[PATCH]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
+                  "// Validate if response has JSON Body \npm.test(\"[PATCH]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
+                  "// Response Validation\nconst schema = {\"oneOf\":[{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_header\",\"enum\":[\"edit_product_header\",\"edit_root_product_model_header\",\"edit_sub_product_model_header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"edit_product_tab\",\"enum\":[\"edit_product_tab\",\"edit_category_tab\",\"product_grid_quick_action\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}\n\n// Validate if response matches JSON schema \npm.test(\"[PATCH]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
+                ]
+              }
+            }
+          ],
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           }
         },
         {
-          "id": "35bb5588-0d46-44db-9bfa-434c6bf367f8",
+          "id": "8e57de99-896e-4157-a95e-94c82f036b2d",
           "name": "Delete an extension",
           "request": {
             "name": "Delete an extension",
@@ -133,8 +213,8 @@
                 "api",
                 "rest",
                 "v1",
-                "ui-extension",
-                ":ui_extension_code"
+                "ui-extensions",
+                ":ui_extension_uuid"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -148,8 +228,8 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "my_awesome_button_extension",
-                  "key": "ui_extension_code"
+                  "value": "e175d525-8fbf-4b26-9242-1daccf301f8b",
+                  "key": "ui_extension_uuid"
                 }
               ]
             },
@@ -161,10 +241,10 @@
             {
               "listen": "test",
               "script": {
-                "id": "f8fdc722-9287-4ed2-ae74-68d8c9bba3f2",
+                "id": "a01fa080-70e4-46be-99bb-a82c9899be4f",
                 "type": "text/javascript",
                 "exec": [
-                  "// Validate if response has empty Body \npm.test(\"[DELETE]::/api/rest/v1/ui-extension/:ui_extension_code - Response has empty Body\", function () {\n    pm.response.to.not.be.withBody;\n});\n"
+                  "// Validate if response has empty Body \npm.test(\"[DELETE]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Response has empty Body\", function () {\n    pm.response.to.not.be.withBody;\n});\n"
                 ]
               }
             }
@@ -191,7 +271,7 @@
     {
       "listen": "prerequest",
       "script": {
-        "id": "154f697c-d5f7-417f-96a1-f3fdfc3aec5e",
+        "id": "4eb7510a-1e0f-4945-9e58-704212198349",
         "type": "text/javascript",
         "exec": [
           "/*\n For simplicity, we acquire a new token before each API call.\n This is not recommended to do the same in production. \n \n Benefit from the 1 hour validity of the access_token and leverage the refresh_token grant type.\n Explore the official PIM API documentation for details https://api.akeneo.com/documentation/authentication.html\n\n*/\n\nappAccessToken = pm.environment.get(\"app_access_token\")\nif (appAccessToken!==undefined) {\n    pm.environment.set(\"pim_access_token\", appAccessToken)\n    console.log(\"Used the token provided in the \\\"app_access_token\\\" variable instead of authenticating with the PIM.\")\n    return\n}\n\nbase64ClientIdSecret = require('btoa')(pm.environment.get(\"clientId\") + ':' + pm.environment.get(\"secret\"))\n\npm.sendRequest({\n    url: pm.environment.get(\"baseUrl\").replace(/\\/$/, '') + '/api/oauth/v1/token',\n    method: 'POST',\n    header: {\n        'Authorization': 'Basic ' + base64ClientIdSecret,\n        'Content-Type': 'application/json',\n    },\n    body: {\n        mode: 'raw',\n        raw: JSON.stringify(\n            {\n                \"username\" : pm.environment.get(\"username\"),\n                \"password\" : pm.environment.get(\"password\"),\n                \"grant_type\": \"password\"\n            }\n        )\n    }\n}, function (err, res) {\n    if(err !== null ){\n        console.error(\"The following error occured during pre-script execution\");\n        console.error(err);\n        return;\n    }\n    console.warn(\"For simplicity, we acquire a new token before each API call, this is not recommended in production. Benefit from the 1 hour validity of the access_token.\");\n    pm.environment.set(\"pim_access_token\", res.json().access_token);\n});"
@@ -227,7 +307,7 @@
     }
   ],
   "info": {
-    "_postman_id": "7bac4606-639d-436b-a17d-7fcdde733aa3",
+    "_postman_id": "e3cbfd5a-aaa1-48f2-96a5-f0efe41c9052",
     "name": "Akeneo PIM UI Extension",
     "version": {
       "raw": "1.0.0",

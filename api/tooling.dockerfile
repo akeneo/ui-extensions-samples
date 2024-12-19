@@ -7,12 +7,13 @@ ARG DEV_UID=1000
 ARG DEV_GID=1000
 
 # Ensure the node user have the correct uid/gid
-RUN deluser --remove-home node \
-  && addgroup -S node -g ${DEV_GID} \
-  && adduser -S -G node -u ${DEV_UID} node
+RUN apk add --no-cache shadow
+RUN usermod --uid ${DEV_UID} node && \
+    groupmod --gid ${DEV_GID} node
 
 # Let the node modules be installed for our node user, not root
 USER node
+
 RUN mkdir -p "/home/node/.node"
 ENV ENV="/home/node/.profile"
 RUN echo "prefix = /home/node/.node" | tee -a ${HOME}/.npmrc

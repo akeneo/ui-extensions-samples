@@ -136,18 +136,73 @@ func removeCredentialsFile(filePath string) error {
 	return os.Remove(filePath)
 }
 
+// Function to read UI extensions from a file
+func readUIExtensionsFromFile(filePath string) ([]map[string]interface{}, error) {
+	log.Println("Reading UI extensions from file:", filePath)
+	file, err := os.Open(filePath)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	var uiExtensions []map[string]interface{}
+	err = json.NewDecoder(file).Decode(&uiExtensions)
+	if err != nil {
+		return nil, err
+	}
+
+	return uiExtensions, nil
+}
+
+// Function to create UI extensions
+func createUIExtensions(accessToken string, uiExtensions []map[string]interface{}) error {
+	log.Println("Creating UI extensions")
+	client := &http.Client{}
+
+	for _, extension := range uiExtensions {
+		code := extension["code"].(string)
+		extensionJSON, err := json.Marshal(extension)
+		if err != nil {
+			return err
+		}
+
+		req, err := http.NewRequest("POST", fmt.Sprintf("http://localhost:8080/api/rest/v1/ui-extension/%s", code), bytes.NewBuffer(extensionJSON))
+		if err != nil {
+			return err
+		}
+		req.Header.Set("Authorization", "Bearer "+accessToken)
+		req.Header.Set("Content-Type", "application/json")
+
+		resp, err := client.Do(req)
+		if err != nil {
+			return err
+		}
+		defer resp.Body.Close()
+
+		if resp.StatusCode != http.StatusCreated {
+			body, _ := ioutil.ReadAll(resp.Body)
+			return fmt.Errorf("failed to create UI extension: %s", body)
+		}
+
+		log.Printf("UI extension created: %v\n", extension)
+	}
+
+	return nil
+}
+
 func main() {
 	// Define the file path in the home directory
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
 		log.Fatalf("Error getting home directory: %v\n", err)
 	}
-	filePath := filepath.Join(homeDir, "akeneo_credentials.txt")
+	credentialsFilePath := filepath.Join(homeDir, "akeneo_credentials.txt")
+	uiExtensionsFilePath := filepath.Join(homeDir, "ui-extensions.json")
 
 	// Check if the credentials file exists
-	if credentialsFileExists(filePath) {
+	if credentialsFileExists(credentialsFilePath) {
 		// Read the credentials from the file
-		credentials, err := readCredentialsFromFile(filePath)
+		credentials, err := readCredentialsFromFile(credentialsFilePath)
 		if err != nil {
 			log.Fatalf("Error reading credentials from file: %v\n", err)
 		}
@@ -158,18 +213,32 @@ func main() {
 		if err != nil {
 			log.Println("Error authenticating with Akeneo PIM API:", err)
 			// Remove the credentials file if authentication fails
-			err = removeCredentialsFile(filePath)
+			err = removeCredentialsFile(credentialsFilePath)
 			if err != nil {
 				log.Fatalf("Error removing credentials file: %v\n", err)
 			}
 		} else {
 			log.Println("Access Token:", accessToken)
+
+			// Read UI extensions from the file
+			uiExtensions, err := readUIExtensionsFromFile(uiExtensionsFilePath)
+			if err != nil {
+				log.Fatalf("Error reading UI extensions from file: %v\n", err)
+			}
+			log.Println("Read UI extensions:", uiExtensions)
+
+			// Create UI extensions
+			err = createUIExtensions(accessToken, uiExtensions)
+			if err != nil {
+				log.Fatalf("Error creating UI extensions: %v\n", err)
+			}
+
 			return
 		}
 	}
 
 	// Define the CLI command
-	command := "APP_ENV=dev docker compose run php bin/console akeneo:connectivity-connection:create testaymeric"
+	command := "APP_ENV=dev docker compose run php bin/console akeneo:connectivity-connection:create testaymeric2"
 
 	// Execute the CLI command
 	output, err := executeCommand(command)
@@ -186,7 +255,7 @@ func main() {
 	log.Println("Extracted credentials:", credentials)
 
 	// Write the credentials to the file
-	err = writeCredentialsToFile(credentials, filePath)
+	err = writeCredentialsToFile(credentials, credentialsFilePath)
 	if err != nil {
 		log.Fatalf("Error writing credentials to file: %v\n", err)
 	}
@@ -198,5 +267,18 @@ func main() {
 	}
 	log.Println("Access Token:", accessToken)
 
-	log.Printf("Credentials file is ready at %s\n", filePath)
+	// Read UI extensions from the file
+	uiExtensions, err := readUIExtensionsFromFile(uiExtensionsFilePath)
+	if err != nil {
+		log.Fatalf("Error reading UI extensions from file: %v\n", err)
+	}
+	log.Println("Read UI extensions:", uiExtensions)
+
+	// Create UI extensions
+	err = createUIExtensions(accessToken, uiExtensions)
+	if err != nil {
+		log.Fatalf("Error creating UI extensions: %v\n", err)
+	}
+
+	log.Printf("Credentials file is ready at %s\n", credentialsFilePath)
 }

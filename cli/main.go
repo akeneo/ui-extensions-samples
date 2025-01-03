@@ -160,13 +160,12 @@ func createUIExtensions(accessToken string, uiExtensions []map[string]interface{
 	client := &http.Client{}
 
 	for _, extension := range uiExtensions {
-		code := extension["code"].(string)
 		extensionJSON, err := json.Marshal(extension)
 		if err != nil {
 			return err
 		}
 
-		req, err := http.NewRequest("POST", fmt.Sprintf("http://localhost:8080/api/rest/v1/ui-extension/%s", code), bytes.NewBuffer(extensionJSON))
+		req, err := http.NewRequest("POST", "http://localhost:8080/api/rest/v1/ui-extensions", bytes.NewBuffer(extensionJSON))
 		if err != nil {
 			return err
 		}

@@ -145,7 +145,7 @@ components:
     ui_extension_simple_button_request:
       type: object
       properties:
-        code:
+        name:
           type: string
           example: my_awesome_button_extension
         position:
@@ -176,7 +176,7 @@ components:
     ui_extension_simple_iframe_request:
       type: object
       properties:
-        code:
+        name:
           type: string
           example: my_awesome_iframe_extension
         position:
@@ -210,7 +210,7 @@ components:
         uuid:
           type: string
           example: f641347d-1768-4e7b-8bb1-e2ff34b05875
-        code:
+        name:
           type: string
           example: my_awesome_button_extension
         position:
@@ -244,7 +244,7 @@ components:
         uuid:
           type: string
           example: 5c8026f9-1617-4529-9623-1d7f8a70a89e
-        code:
+        name:
           type: string
           example: my_awesome_iframe_extension
         position:

@@ -148,6 +148,12 @@ components:
         name:
           type: string
           example: my_awesome_button_extension
+        version:
+          type: string
+          example: V1.02.3
+        description:
+          type: string
+          example: A awesome extension
         position:
           type: string
           default: edit_product_header
@@ -179,6 +185,12 @@ components:
         name:
           type: string
           example: my_awesome_iframe_extension
+        version:
+          type: string
+          example: 20250301250
+        description:
+          type: string
+          example: A awesome iframe extension
         position:
           type: string
           default: edit_product_tab
@@ -213,6 +225,12 @@ components:
         name:
           type: string
           example: my_awesome_button_extension
+        version:
+          type: string
+          example: 2.32
+        description:
+          type: string
+          example: A awesome button
         position:
           type: string
           default: edit_product_header
@@ -247,6 +265,12 @@ components:
         name:
           type: string
           example: my_awesome_iframe_extension
+        version:
+          type: string
+          example: 2025-03-02-109
+        description:
+          type: string
+          example: A awesome iframe
         position:
           type: string
           default: edit_product_tab

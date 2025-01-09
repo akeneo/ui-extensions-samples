@@ -19,13 +19,12 @@ const flatSearchParameters = (parameters, prefix) => {
 };
 
 const addUiExtension = async (res, req) => {
-    const code = req.body.code;
     try {
         const formData = new FormData();
         if (req.file) {
             formData.set('file', new Blob([req.file.buffer.toString()]), req.file.originalname);
         }
-        formData.set('code', code);
+        formData.set('name', req.body.name);
         formData.set('type', req.body.type);
         formData.set('position', req.body.position);
         const flatParameters = flatSearchParameters(req.body.configuration, 'configuration');
@@ -34,7 +33,7 @@ const addUiExtension = async (res, req) => {
             formData.set(`${k}`, flatParameters[k]);
         });
 
-        const response = await fetch(`${PIM_URL}/api/rest/v1/ui-extension/${code}`, {
+        const response = await fetch(`${PIM_URL}/api/rest/v1/ui-extensions`, {
             headers: {
                 'Authorization': `Bearer ${await getBearer()}`,
             },

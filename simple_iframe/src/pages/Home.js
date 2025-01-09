@@ -66,16 +66,16 @@ function Home() {
                             There are no UI extensions in your PIM.
                         </Placeholder></Table.Cell></Table.Row>}
                     {typeof uiExtensions === 'undefined' ? [0, 1, 2].map(() => <Table.Row>
-                        <Table.Cell><SkeletonPlaceholder>Placeholder code</SkeletonPlaceholder></Table.Cell>
+                        <Table.Cell><SkeletonPlaceholder>Placeholder name</SkeletonPlaceholder></Table.Cell>
                         <Table.Cell><SkeletonPlaceholder>Placeholder position</SkeletonPlaceholder></Table.Cell>
                         <Table.Cell><SkeletonPlaceholder>Placeholder configuration</SkeletonPlaceholder></Table.Cell>
                         <Table.Cell><SkeletonPlaceholder>Placeholder action</SkeletonPlaceholder></Table.Cell>
                     </Table.Row>) : (uiExtensions || []).map(uiExtension => <Table.Row>
-                        <Table.Cell>{uiExtension.code}</Table.Cell>
+                        <Table.Cell>{uiExtension.name}</Table.Cell>
                         <Table.Cell>{uiExtension.position}</Table.Cell>
                         <Table.Cell>{uiExtension.type}</Table.Cell>
                         <Table.Cell><pre>{JSON.stringify(uiExtension.configuration)}</pre></Table.Cell>
-                        <Table.Cell><Button level={'danger'} onClick={() => deleteProductTabUiExtension(uiExtension.code)}>Delete</Button></Table.Cell>
+                        <Table.Cell><Button level={'danger'} onClick={() => deleteProductTabUiExtension(uiExtension.uuid)}>Delete</Button></Table.Cell>
                     </Table.Row>)}
                 </Table.Body>
             </Table>

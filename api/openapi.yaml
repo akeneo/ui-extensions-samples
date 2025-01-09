@@ -273,7 +273,7 @@ components:
           example: 2025-03-02-109
         description:
           type: string
-          example: A awesome iframe
+          example: A short human readable description of the extension intent.
         position:
           type: string
           default: edit_product_tab

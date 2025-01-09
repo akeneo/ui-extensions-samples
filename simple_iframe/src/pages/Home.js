@@ -28,7 +28,7 @@ function Home() {
         }
     }
 
-    const deleteProductTabUiExtension = async (code) => callExpressServer(`deleteTabExtension?code=${code}`);
+    const deleteProductTabUiExtension = async (uuid) => callExpressServer(`deleteTabExtension?uuid=${uuid}`);
 
     return (
         <ThemeProvider theme={pimTheme}>

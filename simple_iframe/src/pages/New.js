@@ -111,7 +111,7 @@ function New() {
             configuration.file = file;
         }
         if (label) {
-            configuration.defaultLabel = label;
+            configuration.default_label = label;
             configuration.labels = {en_US: label};
         }
         const params = {name, type, position, configuration}

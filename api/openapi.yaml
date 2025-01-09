@@ -235,6 +235,9 @@ components:
           type: string
           default: edit_product_header
           enum: [edit_product_header, edit_root_product_model_header, edit_sub_product_model_header]
+        status:
+          type: string
+          default: active
         type:
           type: string
           default: simple_button
@@ -275,6 +278,9 @@ components:
           type: string
           default: edit_product_tab
           enum: [edit_product_tab, edit_category_tab, product_grid_quick_action]
+        status:
+          type: string
+          default: inactive
         type:
           type: string
           default: simple_iframe

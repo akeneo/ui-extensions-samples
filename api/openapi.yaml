@@ -148,6 +148,12 @@ components:
         name:
           type: string
           example: my_awesome_button_extension
+        version:
+          type: string
+          example: V1.02.3
+        description:
+          type: string
+          example: A short human readable description of the extension intent.
         position:
           type: string
           default: edit_product_header
@@ -179,6 +185,12 @@ components:
         name:
           type: string
           example: my_awesome_iframe_extension
+        version:
+          type: string
+          example: 20250301250
+        description:
+          type: string
+          example: A short human readable description of the extension intent.
         position:
           type: string
           default: edit_product_tab
@@ -213,10 +225,19 @@ components:
         name:
           type: string
           example: my_awesome_button_extension
+        version:
+          type: string
+          example: 2.32
+        description:
+          type: string
+          example: A short human readable description of the extension intent.
         position:
           type: string
           default: edit_product_header
           enum: [edit_product_header, edit_root_product_model_header, edit_sub_product_model_header]
+        status:
+          type: string
+          default: active
         type:
           type: string
           default: simple_button
@@ -247,10 +268,19 @@ components:
         name:
           type: string
           example: my_awesome_iframe_extension
+        version:
+          type: string
+          example: 2025-03-02-109
+        description:
+          type: string
+          example: A short human readable description of the extension intent.
         position:
           type: string
           default: edit_product_tab
           enum: [edit_product_tab, edit_category_tab, product_grid_quick_action]
+        status:
+          type: string
+          default: active
         type:
           type: string
           default: simple_iframe

@@ -280,7 +280,7 @@ components:
           enum: [edit_product_tab, edit_category_tab, product_grid_quick_action]
         status:
           type: string
-          default: inactive
+          default: active
         type:
           type: string
           default: simple_iframe

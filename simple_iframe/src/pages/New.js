@@ -32,7 +32,7 @@ function New() {
     const [type, setType] = React.useState('simple_iframe');
     const [position, setPosition] = React.useState('edit_product_tab');
     const [label, setLabel] = React.useState('');
-    const [code, setCode] = React.useState('');
+    const [name, setName] = React.useState('');
     const [url, setUrl] = React.useState('');
     const [dirtyCode, setDirtyCode] = React.useState(false);
     const [file, setFile] = React.useState(null);
@@ -75,12 +75,12 @@ function New() {
     const handleSetLabel = (l) => {
         setLabel(l);
         if (!dirtyCode) {
-            setCode(l.replaceAll(/[^a-zA-Z0-9]/g, '_'));
+            setName(l.replaceAll(/[^a-zA-Z0-9]/g, '_'));
         }
     }
 
-    const handleSetCode = (c) => {
-        setCode(c);
+    const handleSetName = (c) => {
+        setName(c);
         setDirtyCode(true);
     }
 
@@ -111,9 +111,10 @@ function New() {
             configuration.file = file;
         }
         if (label) {
+            configuration.default_label = label;
             configuration.labels = {en_US: label};
         }
-        const params = {code, type, position, configuration}
+        const params = {name, type, position, configuration}
         callExpressServer(params);
     }
 
@@ -124,8 +125,8 @@ function New() {
                 <TextInput value={label} onChange={handleSetLabel}></TextInput>
             </Field>
 
-            <Field label={'Code'}>
-                <TextInput value={code} onChange={handleSetCode}></TextInput>
+            <Field label={'Name'}>
+                <TextInput value={name} onChange={handleSetName}></TextInput>
             </Field>
 
             <Field label={'UI Extension type'}>
@@ -150,7 +151,7 @@ function New() {
                 <input type='file' onChange={(event) => setFile(event.target.files[0])}/>
             </Field>}
         </FieldList>
-        <Button onClick={handleCreate} disabled={code === ''}>Create</Button>
+        <Button onClick={handleCreate} disabled={name === ''}>Create</Button>
     </ThemeProvider>;
 }
 

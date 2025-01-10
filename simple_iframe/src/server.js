@@ -23,8 +23,8 @@ app.post('/addUiExtension', upload.single('configuration[file]'), async (req, re
 });
 
 app.get('/deleteTabExtension', async (req, res) => {
-  console.log(`Delete UI Extension ${req.query.code}...`);
-  await deleteTabExtension(res, req.query.code);
+  console.log(`Delete UI Extension ${req.query.uuid}...`);
+  await deleteTabExtension(res, req.query.uuid);
 });
 
 app.get('/getProduct', async (req, res) => {

@@ -27,12 +27,12 @@ paths:
     post:
       summary: 'Add an extension'
       description: |
-        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.product-variant.header`.
+        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`.
         For now, the only configuration keys are the same for all the position.
 
         The `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :
         - `simple_iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
-        - `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.product-variant.header`
+        - `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
       operationId: add_extension
       tags:
         - UI Extension
@@ -66,12 +66,12 @@ paths:
     patch:
       summary: 'Update an extension'
       description: |
-        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.product-variant.header`.
+        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`.
         For now, the only configuration keys are the same for all the position.
 
         The `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :
         - `simple_iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
-        - `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.product-variant.header`
+        - `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
       parameters:
         - $ref: "#/components/parameters/ui_extension_uuid"
       operationId: update_extension
@@ -157,7 +157,7 @@ components:
         position:
           type: string
           default: pim.product.header
-          enum: [pim.product.header, pim.product-model.header, pim.product-variant.header]
+          enum: [pim.product.header, pim.product-model.header, pim.sub-product-model.header]
         type:
           type: string
           default: simple_button
@@ -234,7 +234,7 @@ components:
         position:
           type: string
           default: pim.product.header
-          enum: [pim.product.header, pim.product-model.header, pim.product-variant.header]
+          enum: [pim.product.header, pim.product-model.header, pim.sub-product-model.header]
         status:
           type: string
           default: active

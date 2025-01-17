@@ -1,10 +1,10 @@
 {
   "_": {
-    "postman_id": "d740ba27-f79f-45d4-b79e-e85f7aa05e07"
+    "postman_id": "ca079ddf-f4ff-485e-8651-7de58f644997"
   },
   "item": [
     {
-      "id": "411aef02-0374-45cb-9426-023899506dcc",
+      "id": "279edba5-ca55-4fcf-86a5-2b0821c1113c",
       "name": "UI Extension",
       "description": {
         "content": "Manipulate UI Extensions",
@@ -12,7 +12,7 @@
       },
       "item": [
         {
-          "id": "56172e3d-c22c-4f44-82dd-787c719f6188",
+          "id": "9cdf4703-6ce9-452f-95e0-10bb5ea59ccf",
           "name": "List extensions",
           "request": {
             "name": "List extensions",
@@ -47,12 +47,12 @@
             {
               "listen": "test",
               "script": {
-                "id": "65f6e814-ef11-4863-a334-73380b695075",
+                "id": "98d6fbc3-ea94-4d32-859e-6303b60a146e",
                 "type": "text/javascript",
                 "exec": [
                   "// Validate if response header has matching content-type\npm.test(\"[GET]::/api/rest/v1/ui-extensions - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
                   "// Validate if response has JSON Body \npm.test(\"[GET]::/api/rest/v1/ui-extensions - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
-                  "// Response Validation\nconst schema = {\"type\":\"array\",\"description\":\"Represents a list of extensions\",\"items\":{\"anyOf\":[{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"pim.product.header\",\"enum\":[\"pim.product.header\",\"pim.product-model.header\",\"pim.product-variant.header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"pim.product.tab\",\"enum\":[\"pim.product.tab\",\"pim.category.tab\",\"pim.product-grid.action-bar\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}}\n\n// Validate if response matches JSON schema \npm.test(\"[GET]::/api/rest/v1/ui-extensions - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
+                  "// Response Validation\nconst schema = {\"type\":\"array\",\"description\":\"Represents a list of extensions\",\"items\":{\"anyOf\":[{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"pim.product.header\",\"enum\":[\"pim.product.header\",\"pim.product-model.header\",\"pim.sub-product-model.header\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"pim.product.tab\",\"enum\":[\"pim.product.tab\",\"pim.category.tab\",\"pim.product-grid.action-bar\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}}\n\n// Validate if response matches JSON schema \npm.test(\"[GET]::/api/rest/v1/ui-extensions - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
                 ]
               }
             }
@@ -62,12 +62,12 @@
           }
         },
         {
-          "id": "482848f4-8c22-475e-9074-0f257be07a18",
+          "id": "7a9d412a-3533-4978-8232-d82e87ffb2b0",
           "name": "Add an extension",
           "request": {
             "name": "Add an extension",
             "description": {
-              "content": "The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.product-variant.header`.\nFor now, the only configuration keys are the same for all the position.\n\nThe `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :\n- `simple_iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`\n- `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.product-variant.header`\n",
+              "content": "The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`.\nFor now, the only configuration keys are the same for all the position.\n\nThe `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :\n- `simple_iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`\n- `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`\n",
               "type": "text/plain"
             },
             "url": {
@@ -110,12 +110,12 @@
             {
               "listen": "test",
               "script": {
-                "id": "02d8ee1c-54f8-4eb3-8e78-d1e350b2f645",
+                "id": "f02ebbee-77a1-48b0-93f5-c46d613bf37e",
                 "type": "text/javascript",
                 "exec": [
                   "// Validate if response header has matching content-type\npm.test(\"[POST]::/api/rest/v1/ui-extensions - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
                   "// Validate if response has JSON Body \npm.test(\"[POST]::/api/rest/v1/ui-extensions - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
-                  "// Response Validation\nconst schema = {\"oneOf\":[{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"pim.product.header\",\"enum\":[\"pim.product.header\",\"pim.product-model.header\",\"pim.product-variant.header\"]},\"status\":{\"type\":\"string\",\"default\":\"active\"},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"pim.product.tab\",\"enum\":[\"pim.product.tab\",\"pim.category.tab\",\"pim.product-grid.action-bar\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}\n\n// Validate if response matches JSON schema \npm.test(\"[POST]::/api/rest/v1/ui-extensions - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
+                  "// Response Validation\nconst schema = {\"oneOf\":[{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"pim.product.header\",\"enum\":[\"pim.product.header\",\"pim.product-model.header\",\"pim.sub-product-model.header\"]},\"status\":{\"type\":\"string\",\"default\":\"active\"},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"pim.product.tab\",\"enum\":[\"pim.product.tab\",\"pim.category.tab\",\"pim.product-grid.action-bar\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}\n\n// Validate if response matches JSON schema \npm.test(\"[POST]::/api/rest/v1/ui-extensions - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
                 ]
               }
             }
@@ -125,12 +125,12 @@
           }
         },
         {
-          "id": "edbe2387-6090-46c2-a31b-bc1cdd3ede2a",
+          "id": "53f21d67-f1f2-450f-b76b-5a98ca8105cb",
           "name": "Update an extension",
           "request": {
             "name": "Update an extension",
             "description": {
-              "content": "The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.product-variant.header`.\nFor now, the only configuration keys are the same for all the position.\n\nThe `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :\n- `simple_iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`\n- `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.product-variant.header`\n",
+              "content": "The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`.\nFor now, the only configuration keys are the same for all the position.\n\nThe `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :\n- `simple_iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`\n- `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`\n",
               "type": "text/plain"
             },
             "url": {
@@ -185,12 +185,12 @@
             {
               "listen": "test",
               "script": {
-                "id": "98164ef9-ad49-47b3-aea0-96994f824c93",
+                "id": "b23a75db-2532-40d2-8d90-f15b27b91ee5",
                 "type": "text/javascript",
                 "exec": [
                   "// Validate if response header has matching content-type\npm.test(\"[PATCH]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
                   "// Validate if response has JSON Body \npm.test(\"[PATCH]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
-                  "// Response Validation\nconst schema = {\"oneOf\":[{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"pim.product.header\",\"enum\":[\"pim.product.header\",\"pim.product-model.header\",\"pim.product-variant.header\"]},\"status\":{\"type\":\"string\",\"default\":\"active\"},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"pim.product.tab\",\"enum\":[\"pim.product.tab\",\"pim.category.tab\",\"pim.product-grid.action-bar\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}\n\n// Validate if response matches JSON schema \npm.test(\"[PATCH]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
+                  "// Response Validation\nconst schema = {\"oneOf\":[{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"pim.product.header\",\"enum\":[\"pim.product.header\",\"pim.product-model.header\",\"pim.sub-product-model.header\"]},\"status\":{\"type\":\"string\",\"default\":\"active\"},\"type\":{\"type\":\"string\",\"default\":\"simple_button\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}},{\"type\":\"object\",\"properties\":{\"uuid\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"position\":{\"type\":\"string\",\"default\":\"pim.product.tab\",\"enum\":[\"pim.product.tab\",\"pim.category.tab\",\"pim.product-grid.action-bar\"]},\"type\":{\"type\":\"string\",\"default\":\"simple_iframe\"},\"configuration\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"default_label\":{\"type\":\"string\"},\"labels\":{\"type\":\"object\",\"properties\":{\"en_US\":{\"type\":\"string\"},\"fr_FR\":{\"type\":\"string\"}}}}}}}]}\n\n// Validate if response matches JSON schema \npm.test(\"[PATCH]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Schema is valid\", function() {\n    pm.response.to.have.jsonSchema(schema,{unknownFormats: [\"int32\", \"int64\", \"float\", \"double\"]});\n});\n"
                 ]
               }
             }
@@ -200,7 +200,7 @@
           }
         },
         {
-          "id": "6699f506-034f-4f5d-b0db-2588b4ce4e3b",
+          "id": "701a5721-1f0a-4d4d-91d7-9cbcea10c592",
           "name": "Delete an extension",
           "request": {
             "name": "Delete an extension",
@@ -241,7 +241,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "b7c36a0a-7c88-41f9-a803-fb4646a61e3b",
+                "id": "a04b59f3-b149-4dec-ab0e-2d102027466e",
                 "type": "text/javascript",
                 "exec": [
                   "// Validate if response has empty Body \npm.test(\"[DELETE]::/api/rest/v1/ui-extensions/:ui_extension_uuid - Response has empty Body\", function () {\n    pm.response.to.not.be.withBody;\n});\n"
@@ -271,7 +271,7 @@
     {
       "listen": "prerequest",
       "script": {
-        "id": "7aa97190-fbf3-42f9-9f21-ad70db440db6",
+        "id": "6112d5a5-c1a4-4f6b-88f5-1238985bba6a",
         "type": "text/javascript",
         "exec": [
           "/*\n For simplicity, we acquire a new token before each API call.\n This is not recommended to do the same in production. \n \n Benefit from the 1 hour validity of the access_token and leverage the refresh_token grant type.\n Explore the official PIM API documentation for details https://api.akeneo.com/documentation/authentication.html\n\n*/\n\nappAccessToken = pm.environment.get(\"app_access_token\")\nif (appAccessToken!==undefined) {\n    pm.environment.set(\"pim_access_token\", appAccessToken)\n    console.log(\"Used the token provided in the \\\"app_access_token\\\" variable instead of authenticating with the PIM.\")\n    return\n}\n\nbase64ClientIdSecret = require('btoa')(pm.environment.get(\"clientId\") + ':' + pm.environment.get(\"secret\"))\n\npm.sendRequest({\n    url: pm.environment.get(\"baseUrl\").replace(/\\/$/, '') + '/api/oauth/v1/token',\n    method: 'POST',\n    header: {\n        'Authorization': 'Basic ' + base64ClientIdSecret,\n        'Content-Type': 'application/json',\n    },\n    body: {\n        mode: 'raw',\n        raw: JSON.stringify(\n            {\n                \"username\" : pm.environment.get(\"username\"),\n                \"password\" : pm.environment.get(\"password\"),\n                \"grant_type\": \"password\"\n            }\n        )\n    }\n}, function (err, res) {\n    if(err !== null ){\n        console.error(\"The following error occured during pre-script execution\");\n        console.error(err);\n        return;\n    }\n    console.warn(\"For simplicity, we acquire a new token before each API call, this is not recommended in production. Benefit from the 1 hour validity of the access_token.\");\n    pm.environment.set(\"pim_access_token\", res.json().access_token);\n});"
@@ -307,7 +307,7 @@
     }
   ],
   "info": {
-    "_postman_id": "d740ba27-f79f-45d4-b79e-e85f7aa05e07",
+    "_postman_id": "ca079ddf-f4ff-485e-8651-7de58f644997",
     "name": "Akeneo PIM UI Extension",
     "version": {
       "raw": "1.0.0",

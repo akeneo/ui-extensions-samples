@@ -40,7 +40,7 @@ function ContextPropagation() {
 
     return (
         <>
-            {(window.location === window.parent.location) ? <Helper level="error">In order to work properly, this page must be rendered as an iFrame in the PEF to benefit from the window.postMessage events</Helper> : <></>}
+            {(typeof window !== "undefined" && window.location === window.parent.location) ? <Helper level="error">In order to work properly, this page must be rendered as an iFrame in the PEF to benefit from the window.postMessage events</Helper> : <></>}
             <div>
                 <Information
                 illustration={<UsersIllustration />}

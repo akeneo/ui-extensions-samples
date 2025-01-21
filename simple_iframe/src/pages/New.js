@@ -46,17 +46,17 @@ function New() {
     const configuration = {
         'simple_iframe': {
             label: 'Simple iframe',
-            positions: ['edit_product_tab', 'edit_category_tab', 'product_grid_quick_action'],
+            positions: ['pim.product.tab', 'pim.category.tab', 'pim.product-grid.action-bar'],
             configuration: ['url'],
         },
         'simple_button': {
             label: 'Simple button',
-            positions: ['edit_product_header'],
+            positions: ['pim.product.header'],
             configuration: ['url'],
         },
         'sdk_script': {
             label: 'SDK Script',
-            positions: ['edit_product_tab'],
+            positions: ['pim.product.tab'],
             configuration: ['file'],
         },
     };

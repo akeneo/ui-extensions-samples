@@ -58,23 +58,23 @@ When loading an iframe, several parameters are sent by default as SearchParamete
 
 For example, when `url` is `https://customerwebsite.com/iframe/`, the called URL is `https://customerwebite.com/iframe/?paramA=valueA&paramB=valueB`
 
-For all positions except `product_grid_quick_action`, parameters relative to the connected user are sent:
+For all positions except `pim.product-grid.action-bar`, parameters relative to the connected user are sent:
 - `user[catalog_locale]`
 - `user[catalog_scope]`
 - `user[ui_locale]`
 - `user[username]`
 - `user[email]`
 
-For `edit_product_tab` position, these parameters are sent:
+For `pim.product.tab` position, these parameters are sent:
 - `product[uuid]`
 - `product[identifier]`
 
-For `edit_category_tab` position, this parameter is sent:
+For `pim.category.tab` position, this parameter is sent:
 - `category[code]`
 
 ## The specificities of the grid quick action
 
-For `product_grid_quick_action` position, an object is sent by the parent to the iframe with a [postMessage JS event](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage):
+For `pim.product-grid.action-bar` position, an object is sent by the parent to the iframe with a [postMessage JS event](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage):
 
 The following data is subject to change, we will make it evolve and should perceived as an "API contract" between the PIM and the system listening to those events.
 ```json

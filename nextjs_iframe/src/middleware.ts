@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
 
     const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
     const cspHeader = `
-      frame-ancestors 'self' http://localhost:8080;
+      frame-ancestors 'self' http://localhost:8080 https://*.akeneo.com;
       upgrade-insecure-requests;
   `
     // Replace newline characters and spaces

@@ -10,34 +10,15 @@
     <p>This iframe listens for postMessage events and sends them to a specified URL.</p>
 
     <script>
-        const postUrl = 'https://your-api.com';
 
         window.addEventListener('message', (event) => {
             // Check the origin of the message for security reasons
-            if (event.origin !== 'http://localhost:8080') {
-                // If the origin is not allowed, return early
-                return;
-            }
-
-            // Extract the data from the event
-            const messageData = event.data.filters.productFilters;
-
-            // Make a POST request to the specified URL
-            fetch(postUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: messageData,
-                mode: "no-cors"
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+            // if (event.origin !== 'http://localhost:8080') {
+            //     // If the origin is not allowed, return early
+            //     return;
+            // }
+            console.log(event)
+            
         });
     </script>
 </body>

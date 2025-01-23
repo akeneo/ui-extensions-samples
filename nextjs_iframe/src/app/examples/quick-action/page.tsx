@@ -1,6 +1,6 @@
 "use client"
 
-import { Badge, Helper, Information, Link, Locale, UsersIllustration } from 'akeneo-design-system';
+import { Badge, Information, Link, Locale, UsersIllustration } from 'akeneo-design-system';
 import React, { useState } from 'react';
 
 function ContextPropagation() {
@@ -11,11 +11,16 @@ function ContextPropagation() {
     const [productModelFilters, setProductModelFilters] = useState('');
 
     const handlePostMessage = (event: MessageEvent) => {
-        // if (event.origin !== "http://localhost:8080") {
-        //     You must ensure to check that the origin is authorized to send you events
-        //     console.error("can't accept MessageEvent from this origin due to my configuration");
-        //     return;
-        // }
+        console.log("enter handle post message");
+
+        // Check if the origin is http://localhost:8080
+        // Check if the origin is a subdomain of https://*.akeneo.com
+        const akeneoPattern = /^https:\/\/[^\/]+\.akeneo\.com$/;
+        if (event.origin !== "http://localhost:8080" && !akeneoPattern.test(event.origin)) {
+            console.log(event);
+            console.error("can't accept MessageEvent from this origin due to my configuration");
+            return;
+        }
 
         const data = event.data;
 
@@ -38,13 +43,10 @@ function ContextPropagation() {
         {
             setProductModelFilters(JSON.stringify(JSON.parse(data.filters.productModelFilters), null, 4));
         }
-
-        console.log(event);
     };
 
     React.useEffect(() => {
         window.addEventListener('message', handlePostMessage, false);
-        console.log(window.parent.location)
         // cleanup this component
         return () => {
             window.removeEventListener('message', handlePostMessage);
@@ -53,7 +55,6 @@ function ContextPropagation() {
 
     return (
         <>
-            {(typeof window !== "undefined" && window.location === window.parent.location) ? <Helper level="error">In order to work properly, this page must be rendered as an iFrame at a quick_action position to benefit from the window.postMessage events</Helper> : <></>}
             <div>
                 <Information
                 illustration={<UsersIllustration />}

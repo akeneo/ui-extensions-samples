@@ -9,7 +9,6 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/private/login', request.url))
     }
 
-    const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
     const cspHeader = `
       frame-ancestors 'self' http://localhost:8080 https://*.akeneo.com;
       upgrade-insecure-requests;
@@ -18,24 +17,28 @@ export function middleware(request: NextRequest) {
     const contentSecurityPolicyHeaderValue = cspHeader
       .replace(/\s{2,}/g, ' ')
       .trim()
-   
-    const requestHeaders = new Headers(request.headers)
-    requestHeaders.set('x-nonce', nonce)
-   
-    requestHeaders.set(
-      'Content-Security-Policy',
-      contentSecurityPolicyHeaderValue
-    )
-   
-    const response = NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    })
+
+    const response = NextResponse.next()
+
     response.headers.set(
       'Content-Security-Policy',
       contentSecurityPolicyHeaderValue
     )
+/*
+    response.headers.set(
+      'Access-Control-Allow-Origin',
+      '*'
+    )
 
+    response.headers.set(
+      'Access-Control-Allow-Methods',
+      'GET, POST, PUT, DELETE, OPTIONS'
+    )
+
+    response.headers.set(
+      'Access-Control-Allow-Headers',
+      'Content-Type, Authorization'
+    )
+*/
     return response
 }

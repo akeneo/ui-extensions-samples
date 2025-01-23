@@ -11,11 +11,16 @@ function ContextPropagation() {
     const [productModelFilters, setProductModelFilters] = useState('');
 
     const handlePostMessage = (event: MessageEvent) => {
-        // if (event.origin !== "http://localhost:8080") {
-        //     You must ensure to check that the origin is authorized to send you events
-        //     console.error("can't accept MessageEvent from this origin due to my configuration");
-        //     return;
-        // }
+        console.log("enter handle post message");
+
+        // Check if the origin is http://localhost:8080
+        // Check if the origin is a subdomain of https://*.akeneo.com
+        const akeneoPattern = /^https:\/\/[^\/]+\.akeneo\.com$/;
+        if (event.origin !== "http://localhost:8080" && !akeneoPattern.test(event.origin)) {
+            console.log(event);
+            console.error("can't accept MessageEvent from this origin due to my configuration");
+            return;
+        }
 
         const data = event.data;
 
@@ -38,15 +43,14 @@ function ContextPropagation() {
         {
             setProductModelFilters(JSON.stringify(JSON.parse(data.filters.productModelFilters), null, 4));
         }
-
-        console.log(event);
     };
 
     React.useEffect(() => {
+        console.log("add event listener on message");
         window.addEventListener('message', handlePostMessage, false);
-        console.log(window.parent.location)
         // cleanup this component
         return () => {
+            console.log("remove event listener on message");
             window.removeEventListener('message', handlePostMessage);
         };
     }, []);

@@ -46,9 +46,11 @@ function ContextPropagation() {
     };
 
     React.useEffect(() => {
+        console.log("add event listener on message");
         window.addEventListener('message', handlePostMessage, false);
         // cleanup this component
         return () => {
+            console.log("remove event listener on message");
             window.removeEventListener('message', handlePostMessage);
         };
     }, []);

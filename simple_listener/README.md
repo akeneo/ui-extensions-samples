@@ -1,0 +1,6 @@
+## Locally
+
+```
+npx serve
+```
+

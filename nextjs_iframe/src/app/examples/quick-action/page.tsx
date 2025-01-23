@@ -1,6 +1,6 @@
 "use client"
 
-import { Badge, Information, Link, Locale, UsersIllustration } from 'akeneo-design-system';
+import { Badge, Helper, Information, Link, Locale, UsersIllustration } from 'akeneo-design-system';
 import React, { useState } from 'react';
 
 function ContextPropagation() {
@@ -55,6 +55,7 @@ function ContextPropagation() {
 
     return (
         <>
+            {(typeof window !== "undefined" && window.location === window.parent.location) ? <Helper level="error">In order to work properly, this page must be rendered as an iFrame at a quick_action position to benefit from the window.postMessage events</Helper> : <></>}
             <div>
                 <Information
                 illustration={<UsersIllustration />}

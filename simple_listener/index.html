@@ -3,22 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iframe Listener</title>
+    <title>Iframe with postMessage listener and log</title>
 </head>
 <body>
     <h1>Iframe Listener</h1>
-    <p>This iframe listens for postMessage events and sends them to a specified URL.</p>
+    <p>This iframe listens for postMessage events and log it to the console</p>
 
     <script>
-
         window.addEventListener('message', (event) => {
-            // Check the origin of the message for security reasons
-            // if (event.origin !== 'http://localhost:8080') {
-            //     // If the origin is not allowed, return early
-            //     return;
-            // }
-            console.log(event)
-            
+            console.log(event)            
         });
     </script>
 </body>

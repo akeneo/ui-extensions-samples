@@ -11,10 +11,11 @@ function ContextPropagation() {
     const [productModelFilters, setProductModelFilters] = useState('');
 
     const handlePostMessage = (event: MessageEvent) => {
-        if (event.origin !== "http://localhost:8080") {
-            console.error("can't accept MessageEvent from this origin due to my configuration");
-            return;
-        }
+        // if (event.origin !== "http://localhost:8080") {
+        //     You must ensure to check that the origin is authorized to send you events
+        //     console.error("can't accept MessageEvent from this origin due to my configuration");
+        //     return;
+        // }
 
         const data = event.data;
 

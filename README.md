@@ -99,7 +99,7 @@ For `pim.category.tab` position, this parameter is sent:
 
 For `pim.product-grid.action-bar` position, an object is sent by the parent to the iframe with a [postMessage JS event](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage):
 
-The following data is subject to change, we will make it evolve and should perceived as an "API contract" between the PIM and the system listening to those events. (DEPRECATION NOTICE: this format will not be supported by the end of february 2025, we will soon communicate on the new format).
+The following data is subject to change, we will make it evolve and should perceived as an "API contract" between the PIM and the system listening to those events. (DEPRECATION NOTICE: this format will not be supported by the end of february 2025, we will soon communicate on the new format. We'll send you a list of product uuid or product model codes directly instead of a search query. This list will be limited to a certain number of products, hence the action will not be possible if the number of selected product is greater than 500 products).
 ```json
 {
   "filters": {

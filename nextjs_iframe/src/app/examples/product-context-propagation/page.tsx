@@ -6,33 +6,31 @@ import React, { useState } from 'react';
 function ContextPropagation() {
 
     const [locale, setLocale] = useState('');
-    const [scope, setScope] = useState('');
+    const [channel, setChannel] = useState('');
 
     const handlePostMessage = (event: MessageEvent) => {
         console.log("enter handle post message");
+        console.log(event);
 
         // Check if the origin is http://localhost:8080
         // Check if the origin is a subdomain of https://*.akeneo.com
         const akeneoPattern = /^https:\/\/[^\/]+\.akeneo\.com$/;
         if (event.origin !== "http://localhost:8080" && !akeneoPattern.test(event.origin)) {
-            console.log(event);
             console.error("can't accept MessageEvent from this origin due to my configuration");
             return;
         }
 
-        const data = JSON.parse(event.data);
+        const data = event.data;
 
         if(data.context.locale != null)        
         {
             setLocale(data.context.locale);
         }
 
-        if(data.context.scope != null)        
+        if(data.context.channel != null)        
         {
-            setScope(data.context.scope);
+            setChannel(data.context.channel);
         }
-
-        console.log(event);
     };
 
     React.useEffect(() => {
@@ -67,7 +65,7 @@ function ContextPropagation() {
             <div>
                 Current locale is: <Locale code={locale} /> ({locale})
                 <br/>
-                Current scope is: {scope}
+                Current channel is: {channel}
             </div>
             <div>
                 

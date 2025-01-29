@@ -9,7 +9,13 @@ function ContextPropagation() {
     const [scope, setScope] = useState('');
 
     const handlePostMessage = (event: MessageEvent) => {
-        if (event.origin !== "http://localhost:8080") {
+        console.log("enter handle post message");
+
+        // Check if the origin is http://localhost:8080
+        // Check if the origin is a subdomain of https://*.akeneo.com
+        const akeneoPattern = /^https:\/\/[^\/]+\.akeneo\.com$/;
+        if (event.origin !== "http://localhost:8080" && !akeneoPattern.test(event.origin)) {
+            console.log(event);
             console.error("can't accept MessageEvent from this origin due to my configuration");
             return;
         }
@@ -30,10 +36,12 @@ function ContextPropagation() {
     };
 
     React.useEffect(() => {
+        console.log("add event listener on message");
         window.addEventListener('message', handlePostMessage, false);
 
         // cleanup this component
         return () => {
+            console.log("remove event listener on message");
             window.removeEventListener('message', handlePostMessage);
         };
     }, []);

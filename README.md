@@ -8,9 +8,9 @@ Thank you for your understanding and collaboration during this phase.
 
 ## UI Extensions types
 
-- `simple_iframe` (become `iframe`)
+- `simple_iframe` (will become `iframe`)
   - On click: load content of an external website in several places in the PIM with contextualized information (scope/locale/user/product). Embedded as an iFrame
-- `simple_button` (become `open`)
+- `simple_button` (will become `open`)
   - On click: open a new tab within the user's browser
 - `action` (soon to be released)
   - On click: our backend service will call the configured url with a POST method. The body of this HTTP request will contain contextualized information (scope/locale/user/product)
@@ -24,13 +24,27 @@ Import the collection and the [postman environment template](./api/postman/postm
 
 # Enhanced context
 
-## `action` type body
+## Using `action` or `iframe` type
 
-```
+By using `action` or `iframe` type you'll be able to run your business logic based on contextual information:
+- Who is the user triggering the action or opening the iframe
+- In which locale / channel he/she is navigating
+- On which product(s) the action or the iframe is requested
+
+
+```json
 {
-  "products": {
-    "product_uuids": [a, b, c],
-    "product_model_codes": [a, b, c],
+  "data": {
+    //In case of an action from the product grid
+    "products": {
+      "product_uuids": ["abc-123", "abc-456", "abc-789"],
+      "product_model_codes": ["x", "y", "z"],
+    },
+
+    //In case of an action from the PEF
+    "product": {
+      "product_uuid": "abc-123"
+    }
   },
   "context": {
       "locale": "en_US",
@@ -38,7 +52,7 @@ Import the collection and the [postman environment template](./api/postman/postm
   },
   "user": {
       "username": "julia",
-      "groups": "redactor, emerch",
+      "groups": ["redactor", "marketing", "IT"]
   }
 }
 ```

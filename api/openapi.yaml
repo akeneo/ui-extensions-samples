@@ -153,7 +153,7 @@ components:
           example: V1.02.3
         description:
           type: string
-          example: A short human readable description of the extension intent.
+          example: A short human readable description.
         position:
           type: string
           default: pim.product.header
@@ -190,7 +190,7 @@ components:
           example: 20250301250
         description:
           type: string
-          example: A short human readable description of the extension intent.
+          example: A short human readable description.
         position:
           type: string
           default: pim.product.tab
@@ -230,7 +230,7 @@ components:
           example: 2.32
         description:
           type: string
-          example: A short human readable description of the extension intent.
+          example: A short human readable description.
         position:
           type: string
           default: pim.product.header
@@ -273,7 +273,7 @@ components:
           example: 2025-03-02-109
         description:
           type: string
-          example: A short human readable description of the extension intent.
+          example: A short human readable description.
         position:
           type: string
           default: pim.product.tab

@@ -14,6 +14,7 @@ export default function handler(
       endpoints: { 
         success: '/api/success',
         error: '/api/error',
+        not_found: '/api/not_found',
         timeout: '/api/wait_for_height_seconds',
       } 
     })

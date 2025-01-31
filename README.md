@@ -6,26 +6,16 @@ We would like to inform you that this feature is currently in its <b>BETA</b> st
 Please be aware that updates or modifications may occur without prior notice as we aim to enhance stability, performance, and usability.
 Thank you for your understanding and collaboration during this phase.
 
-## Simple iframe & simple buttons example
+## UI Extensions types
 
-This application example gives access to 4 features:
-- A UI for listing and create UI Extensions,
-- An example page for the product edit tab position, displaying the product values in a compressed design,
-- An example page for the category edit tab position, displaying the products belonging to a category.
-- An example page for the Quick action position, displaying the products / product models belonging to a product grid selection.
-
-Please read the [README.md](./simple_iframe/README.md) in the simple_iframe folder.
-
-## DSM SDK script example
-
-This folder contains a minimal example for the SDK Script feature, including the Akeneo DSM.
-
-Please check the [README.md](./dsm_sdk_script/README.md)
+- `simple_iframe` (will become `iframe`)
+  - On click: load content of an external website in several places in the PIM with contextualized information (scope/locale/user/product). Embedded as an iFrame
+- `simple_button` (will become `open`)
+  - On click: open a new tab within the user's browser
+- `action` (soon to be released)
+  - On click: our backend service will call the configured url with a POST method. The body of this HTTP request will contain contextualized information (scope/locale/user/product)
 
 # API documentation
-
-There are 3 endpoints: upsert, delete and list.
-Each of this endpoint will return a 404 id the feature flag `enable-ui-extension` is disabled.
 
 The [openapi specification](./api/openapi.yaml) describe how to use this API.
 
@@ -33,6 +23,39 @@ The prefered way of testing out this API is by using the [Postman Collection](./
 Import the collection and the [postman environment template](./api/postman/postman_environment_template.json) into postman, then fill the environment variable.
 
 # Enhanced context
+
+## Using `action` or `iframe` type
+
+By using `action` or `iframe` type you'll be able to run your business logic based on contextual information:
+- Who is the user triggering the action or opening the iframe
+- In which locale / channel he/she is navigating
+- On which product(s) the action or the iframe is requested
+
+
+```json
+{
+  "data": {
+    //In case of an action from the product grid
+    "products": {
+      "product_uuids": ["abc-123", "abc-456", "abc-789"],
+      "product_model_codes": ["x", "y", "z"],
+    },
+
+    //In case of an action from the PEF
+    "product": {
+      "product_uuid": "abc-123"
+    }
+  },
+  "context": {
+      "locale": "en_US",
+      "channel": "ecommerce",
+  },
+  "user": {
+      "username": "julia",
+      "groups": ["redactor", "marketing", "IT"]
+  }
+}
+```
 
 ## Query parameters placeholders
 
@@ -76,7 +99,7 @@ For `pim.category.tab` position, this parameter is sent:
 
 For `pim.product-grid.action-bar` position, an object is sent by the parent to the iframe with a [postMessage JS event](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage):
 
-The following data is subject to change, we will make it evolve and should perceived as an "API contract" between the PIM and the system listening to those events.
+The following data is subject to change, we will make it evolve and should perceived as an "API contract" between the PIM and the system listening to those events. (DEPRECATION NOTICE: this format will not be supported by the end of february 2025, we will soon communicate on the new format. We'll send you a list of product uuid or product model codes directly instead of a search query. This list will be limited to a certain number of products, hence the action will not be possible if the number of selected product is greater than 500 products).
 ```json
 {
   "filters": {

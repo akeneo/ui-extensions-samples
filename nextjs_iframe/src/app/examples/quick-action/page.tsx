@@ -1,7 +1,8 @@
 "use client"
 
 import { Badge, Helper, Information, Link, Locale, UsersIllustration } from 'akeneo-design-system';
-import React, { useState } from 'react';
+import React, {useRef, useState} from "react";
+
 
 function ContextPropagation() {
 
@@ -9,6 +10,19 @@ function ContextPropagation() {
     const [channel, setChannel] = useState('');
     const [productFilters, setProductFilters] = useState('');
     const [productModelFilters, setProductModelFilters] = useState('');
+
+    const contextAlreadyAsked = useRef<boolean>(false)
+    const requestContext = () => {
+        if (!contextAlreadyAsked.current) {
+            contextAlreadyAsked.current = true;
+            window.parent.postMessage(
+                {
+                    type: 'request_context'
+                },
+                "*"
+            );
+        }
+    }
 
     const handlePostMessage = (event: MessageEvent) => {
         console.log("enter handle post message");
@@ -24,33 +38,32 @@ function ContextPropagation() {
 
         const data = event.data;
 
-        if(data.context.locale != null)        
+        if(data.context.locale != null)
         {
             setLocale(data.context.locale);
         }
 
-        if(data.context.channel != null)        
+        if(data.context.channel != null)
         {
             setChannel(data.context.channel);
         }
 
-        if(data.filters.productFilters != null)        
+        if(data.filters.productFilters != null)
         {
             setProductFilters(JSON.stringify(JSON.parse(data.filters.productFilters), null, 4));
         }
 
-        if(data.filters.productModelFilters != null)        
+        if(data.filters.productModelFilters != null)
         {
             setProductModelFilters(JSON.stringify(JSON.parse(data.filters.productModelFilters), null, 4));
         }
     };
 
     React.useEffect(() => {
-        console.log("add event listener on message");
         window.addEventListener('message', handlePostMessage, false);
+        requestContext();
         // cleanup this component
         return () => {
-            console.log("remove event listener on message");
             window.removeEventListener('message', handlePostMessage);
         };
     }, []);
@@ -93,6 +106,6 @@ function ContextPropagation() {
             </div>
         </>
     );
-};
+}
 
 export default ContextPropagation;

@@ -1,4 +1,4 @@
-# Simple iframe & simple buttons example
+# Iframe & link example
 
 This mini application allows to display several screens in a PIM.
 

@@ -30,9 +30,9 @@ paths:
         The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`.
         For now, the only configuration keys are the same for all the position.
 
-        The `type` available are `iframe` and `simple_button`. It depends on the `position` :
+        The `type` available are `iframe` and `link`. It depends on the `position` :
         - `iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
-        - `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
+        - `link` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
       operationId: add_extension
       tags:
         - UI Extension
@@ -44,7 +44,7 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: "#/components/schemas/ui_extension_simple_button_request"
+                - $ref: "#/components/schemas/ui_extension_link_request"
                 - $ref: "#/components/schemas/ui_extension_iframe_request"
       responses:
         '201':
@@ -54,7 +54,7 @@ paths:
             application/json:
               schema: 
                 oneOf: 
-                  - $ref: "#/components/schemas/ui_extension_simple_button_response"
+                  - $ref: "#/components/schemas/ui_extension_link_response"
                   - $ref: "#/components/schemas/ui_extension_iframe_response"
         '400':
           description: |
@@ -69,9 +69,9 @@ paths:
         The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`.
         For now, the only configuration keys are the same for all the position.
 
-        The `type` available are `iframe` and `simple_button`. It depends on the `position` :
+        The `type` available are `iframe` and `link`. It depends on the `position` :
         - `iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
-        - `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
+        - `link` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
       parameters:
         - $ref: "#/components/parameters/ui_extension_uuid"
       operationId: update_extension
@@ -85,7 +85,7 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: "#/components/schemas/ui_extension_simple_button_request"
+                - $ref: "#/components/schemas/ui_extension_link_request"
                 - $ref: "#/components/schemas/ui_extension_iframe_request"
       responses:
         '200':
@@ -95,7 +95,7 @@ paths:
             application/json:
               schema: 
                 oneOf: 
-                  - $ref: "#/components/schemas/ui_extension_simple_button_response"
+                  - $ref: "#/components/schemas/ui_extension_link_response"
                   - $ref: "#/components/schemas/ui_extension_iframe_response"
         '400':
           description: |
@@ -140,9 +140,9 @@ components:
       description: 'Represents a list of extensions'
       items: 
         anyOf: 
-          - $ref: "#/components/schemas/ui_extension_simple_button_request"
+          - $ref: "#/components/schemas/ui_extension_link_request"
           - $ref: "#/components/schemas/ui_extension_iframe_request"
-    ui_extension_simple_button_request:
+    ui_extension_link_request:
       type: object
       properties:
         name:
@@ -160,7 +160,7 @@ components:
           enum: [pim.product.header, pim.product-model.header, pim.sub-product-model.header]
         type:
           type: string
-          default: simple_button
+          default: link
         configuration:
           type: object
           properties:
@@ -216,7 +216,7 @@ components:
                 fr_FR:
                   type: string
                   example: Ma super iFrame extension
-    ui_extension_simple_button_response:
+    ui_extension_link_response:
       type: object
       properties:
         uuid:
@@ -240,7 +240,7 @@ components:
           default: active
         type:
           type: string
-          default: simple_button
+          default: link
         configuration:
           type: object
           properties:

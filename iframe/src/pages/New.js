@@ -45,12 +45,12 @@ function New() {
 
     const configuration = {
         'iframe': {
-            label: 'Simple iframe',
+            label: 'Iframe',
             positions: ['pim.product.tab', 'pim.category.tab', 'pim.product-grid.action-bar'],
             configuration: ['url'],
         },
-        'simple_button': {
-            label: 'Simple button',
+        'link': {
+            label: 'Link',
             positions: ['pim.product.header'],
             configuration: ['url'],
         },

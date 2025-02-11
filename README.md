@@ -6,7 +6,7 @@ We would like to inform you that this feature is currently in its <b>BETA</b> st
 Please be aware that updates or modifications may occur without prior notice as we aim to enhance stability, performance, and usability.
 Thank you for your understanding and collaboration during this phase.
 
-## Simple iframe & simple buttons example
+## Iframe & link example
 
 This application example gives access to 4 features:
 - A UI for listing and create UI Extensions,
@@ -14,7 +14,7 @@ This application example gives access to 4 features:
 - An example page for the category edit tab position, displaying the products belonging to a category.
 - An example page for the Quick action position, displaying the products / product models belonging to a product grid selection.
 
-Please read the [README.md](./simple_iframe/README.md) in the simple_iframe folder.
+Please read the [README.md](./iframe/README.md) in the iframe folder.
 
 ## DSM SDK script example
 
@@ -38,9 +38,9 @@ Import the collection and the [postman environment template](./api/postman/postm
 
 You can ask for specific values to construct the urls thanks to a specific placeholder pattern. Let's take an example:
 
-You want to configure a `simple_button` to open Google Shopping with a search filtered on the product you're on by it's name.
+You want to configure a `link` button to open Google Shopping with a search filtered on the product you're on by it's name.
 
-You can configure a UI Extension with the following url `https://www.google.com/search?q=%name%&tbm=shop&gl=us`, then we will dynamically put the value of the attribute code `name` when the user will click on the simple button.
+You can configure a UI Extension with the following url `https://www.google.com/search?q=%name%&tbm=shop&gl=us`, then we will dynamically put the value of the attribute code `name` when the user will click on the button.
 
 Valid placeholders attributes are:
 - attribute of type: `identifier` & `text` only

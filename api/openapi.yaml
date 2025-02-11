@@ -27,12 +27,13 @@ paths:
     post:
       summary: 'Add an extension'
       description: |
-        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`.
+        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`, `pim.product-grid.action-bar`.
         For now, the only configuration keys are the same for all the position.
 
-        The `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :
-        - `simple_iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
-        - `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
+        The `type` available are `iframe`, `link` and `action`. It depends on the `position` :
+        - `iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
+        - `link` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
+        - `action` for `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header` and `pim.product-grid.action-bar`
       operationId: add_extension
       tags:
         - UI Extension
@@ -44,8 +45,9 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: "#/components/schemas/ui_extension_simple_button_request"
-                - $ref: "#/components/schemas/ui_extension_simple_iframe_request"
+                - $ref: "#/components/schemas/ui_extension_link_request"
+                - $ref: "#/components/schemas/ui_extension_iframe_request"
+                - $ref: "#/components/schemas/ui_extension_action_request"
       responses:
         '201':
           description: |
@@ -54,8 +56,9 @@ paths:
             application/json:
               schema: 
                 oneOf: 
-                  - $ref: "#/components/schemas/ui_extension_simple_button_response"
-                  - $ref: "#/components/schemas/ui_extension_simple_iframe_response"
+                  - $ref: "#/components/schemas/ui_extension_link_response"
+                  - $ref: "#/components/schemas/ui_extension_iframe_response"
+                  - $ref: "#/components/schemas/ui_extension_action_response"
         '400':
           description: |
             Invalid Json
@@ -66,12 +69,13 @@ paths:
     patch:
       summary: 'Update an extension'
       description: |
-        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`.
+        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`, `pim.product-grid.action-bar`.
         For now, the only configuration keys are the same for all the position.
 
-        The `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :
-        - `simple_iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
-        - `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
+        The `type` available are `iframe`, `link` and `action`. It depends on the `position` :
+        - `iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
+        - `link` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
+        - `action` for `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header` and `pim.product-grid.action-bar`
       parameters:
         - $ref: "#/components/parameters/ui_extension_uuid"
       operationId: update_extension
@@ -85,8 +89,9 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: "#/components/schemas/ui_extension_simple_button_request"
-                - $ref: "#/components/schemas/ui_extension_simple_iframe_request"
+                - $ref: "#/components/schemas/ui_extension_link_request"
+                - $ref: "#/components/schemas/ui_extension_iframe_request"
+                - $ref: "#/components/schemas/ui_extension_action_request"
       responses:
         '200':
           description: |
@@ -95,8 +100,9 @@ paths:
             application/json:
               schema: 
                 oneOf: 
-                  - $ref: "#/components/schemas/ui_extension_simple_button_response"
-                  - $ref: "#/components/schemas/ui_extension_simple_iframe_response"
+                  - $ref: "#/components/schemas/ui_extension_link_response"
+                  - $ref: "#/components/schemas/ui_extension_iframe_response"
+                  - $ref: "#/components/schemas/ui_extension_action_response"
         '400':
           description: |
             Invalid Json
@@ -140,9 +146,10 @@ components:
       description: 'Represents a list of extensions'
       items: 
         anyOf: 
-          - $ref: "#/components/schemas/ui_extension_simple_button_request"
-          - $ref: "#/components/schemas/ui_extension_simple_iframe_request"
-    ui_extension_simple_button_request:
+          - $ref: "#/components/schemas/ui_extension_link_request"
+          - $ref: "#/components/schemas/ui_extension_iframe_request"
+          - $ref: "#/components/schemas/ui_extension_action_request"
+    ui_extension_link_request:
       type: object
       properties:
         name:
@@ -160,7 +167,7 @@ components:
           enum: [pim.product.header, pim.product-model.header, pim.sub-product-model.header]
         type:
           type: string
-          default: simple_button
+          default: link
         configuration:
           type: object
           properties:
@@ -169,17 +176,17 @@ components:
               example: https://www.example.com
             default_label:
               type: string
-              example: My awesome button extension
+              example: My awesome link extension
             labels:
               type: object 
               properties:
                 en_US:
                   type: string
-                  example: My awesome button extension
+                  example: My awesome link extension
                 fr_FR:
                   type: string
-                  example: Ma super button extension
-    ui_extension_simple_iframe_request:
+                  example: Ma super link extension
+    ui_extension_iframe_request:
       type: object
       properties:
         name:
@@ -197,7 +204,7 @@ components:
           enum: [pim.product.tab, pim.category.tab, pim.product-grid.action-bar]
         type:
           type: string
-          default: simple_iframe
+          default: iframe
         configuration:
           type: object
           properties:
@@ -216,7 +223,44 @@ components:
                 fr_FR:
                   type: string
                   example: Ma super iFrame extension
-    ui_extension_simple_button_response:
+    ui_extension_action_request:
+      type: object
+      properties:
+        name:
+          type: string
+          example: my_awesome_action_extension
+        version:
+          type: string
+          example: 20250301250
+        description:
+          type: string
+          example: A short human readable description.
+        position:
+          type: string
+          default: pim.product.tab
+          enum: [pim.product.header, pim.product-model.header, pim.sub-product-model.header, pim.product-grid.action-bar]
+        type:
+          type: string
+          default: action
+        configuration:
+          type: object
+          properties:
+            url:
+              type: string
+              example: https://www.example.com
+            default_label:
+              type: string
+              example: My awesome action extension
+            labels:
+              type: object 
+              properties:
+                en_US:
+                  type: string
+                  example: My awesome action extension
+                fr_FR:
+                  type: string
+                  example: Ma super extension action
+    ui_extension_link_response:
       type: object
       properties:
         uuid:
@@ -240,7 +284,7 @@ components:
           default: active
         type:
           type: string
-          default: simple_button
+          default: link
         configuration:
           type: object
           properties:
@@ -249,17 +293,17 @@ components:
               example: https://www.example.com
             default_label:
               type: string
-              example: My awesome button extension
+              example: My awesome link extension
             labels:
               type: object 
               properties:
                 en_US:
                   type: string
-                  example: My awesome button extension
+                  example: My awesome link extension
                 fr_FR:
                   type: string
-                  example: Ma super button extension
-    ui_extension_simple_iframe_response:
+                  example: Ma super link extension
+    ui_extension_iframe_response:
       type: object
       properties:
         uuid:
@@ -280,7 +324,7 @@ components:
           enum: [pim.product.tab, pim.category.tab, pim.product-grid.action-bar]
         type:
           type: string
-          default: simple_iframe
+          default: iframe
         configuration:
           type: object
           properties:
@@ -299,6 +343,46 @@ components:
                 fr_FR:
                   type: string
                   example: Ma super iFrame extension
+    ui_extension_action_response:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 9c8a0eb1-64c9-4497-b09e-35300bf9aa6a
+        name:
+          type: string
+          example: my_awesome_action_extension
+        version:
+          type: string
+          example: 2025-03-02-109
+        description:
+          type: string
+          example: A short human readable description.
+        position:
+          type: string
+          default: pim.product.tab
+          enum: [pim.product.header, pim.product-model.header, pim.sub-product-model.header, pim.product-grid.action-bar]
+        type:
+          type: string
+          default: action
+        configuration:
+          type: object
+          properties:
+            url:
+              type: string
+              example: https://www.example.com
+            default_label:
+              type: string
+              example: My awesome action extension
+            labels:
+              type: object 
+              properties:
+                en_US:
+                  type: string
+                  example: My awesome action extension
+                fr_FR:
+                  type: string
+                  example: Ma super extension action
   securitySchemes:
     pim_access_token:
       type: apiKey

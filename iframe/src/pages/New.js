@@ -29,7 +29,7 @@ const flatSearchParameters = (parameters, prefix) => {
 
 function New() {
     const navigate = useNavigate();
-    const [type, setType] = React.useState('simple_iframe');
+    const [type, setType] = React.useState('iframe');
     const [position, setPosition] = React.useState('edit_product_tab');
     const [label, setLabel] = React.useState('');
     const [name, setName] = React.useState('');
@@ -44,7 +44,7 @@ function New() {
     }
 
     const configuration = {
-        'simple_iframe': {
+        'iframe': {
             label: 'Simple iframe',
             positions: ['pim.product.tab', 'pim.category.tab', 'pim.product-grid.action-bar'],
             configuration: ['url'],

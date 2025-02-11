@@ -14,7 +14,7 @@ This application example gives access to 4 features:
 - An example page for the category edit tab position, displaying the products belonging to a category.
 - An example page for the Quick action position, displaying the products / product models belonging to a product grid selection.
 
-Please read the [README.md](./simple_iframe/README.md) in the simple_iframe folder.
+Please read the [README.md](./iframe/README.md) in the iframe folder.
 
 ## DSM SDK script example
 

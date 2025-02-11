@@ -30,8 +30,8 @@ paths:
         The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`.
         For now, the only configuration keys are the same for all the position.
 
-        The `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :
-        - `simple_iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
+        The `type` available are `iframe` and `simple_button`. It depends on the `position` :
+        - `iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
         - `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
       operationId: add_extension
       tags:
@@ -45,7 +45,7 @@ paths:
             schema:
               oneOf:
                 - $ref: "#/components/schemas/ui_extension_simple_button_request"
-                - $ref: "#/components/schemas/ui_extension_simple_iframe_request"
+                - $ref: "#/components/schemas/ui_extension_iframe_request"
       responses:
         '201':
           description: |
@@ -55,7 +55,7 @@ paths:
               schema: 
                 oneOf: 
                   - $ref: "#/components/schemas/ui_extension_simple_button_response"
-                  - $ref: "#/components/schemas/ui_extension_simple_iframe_response"
+                  - $ref: "#/components/schemas/ui_extension_iframe_response"
         '400':
           description: |
             Invalid Json
@@ -69,8 +69,8 @@ paths:
         The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`.
         For now, the only configuration keys are the same for all the position.
 
-        The `type` available are `simple_iframe` and `simple_button`. It depends on the `position` :
-        - `simple_iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
+        The `type` available are `iframe` and `simple_button`. It depends on the `position` :
+        - `iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
         - `simple_button` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
       parameters:
         - $ref: "#/components/parameters/ui_extension_uuid"
@@ -86,7 +86,7 @@ paths:
             schema:
               oneOf:
                 - $ref: "#/components/schemas/ui_extension_simple_button_request"
-                - $ref: "#/components/schemas/ui_extension_simple_iframe_request"
+                - $ref: "#/components/schemas/ui_extension_iframe_request"
       responses:
         '200':
           description: |
@@ -96,7 +96,7 @@ paths:
               schema: 
                 oneOf: 
                   - $ref: "#/components/schemas/ui_extension_simple_button_response"
-                  - $ref: "#/components/schemas/ui_extension_simple_iframe_response"
+                  - $ref: "#/components/schemas/ui_extension_iframe_response"
         '400':
           description: |
             Invalid Json
@@ -141,7 +141,7 @@ components:
       items: 
         anyOf: 
           - $ref: "#/components/schemas/ui_extension_simple_button_request"
-          - $ref: "#/components/schemas/ui_extension_simple_iframe_request"
+          - $ref: "#/components/schemas/ui_extension_iframe_request"
     ui_extension_simple_button_request:
       type: object
       properties:
@@ -179,7 +179,7 @@ components:
                 fr_FR:
                   type: string
                   example: Ma super button extension
-    ui_extension_simple_iframe_request:
+    ui_extension_iframe_request:
       type: object
       properties:
         name:
@@ -197,7 +197,7 @@ components:
           enum: [pim.product.tab, pim.category.tab, pim.product-grid.action-bar]
         type:
           type: string
-          default: simple_iframe
+          default: iframe
         configuration:
           type: object
           properties:
@@ -259,7 +259,7 @@ components:
                 fr_FR:
                   type: string
                   example: Ma super button extension
-    ui_extension_simple_iframe_response:
+    ui_extension_iframe_response:
       type: object
       properties:
         uuid:
@@ -280,7 +280,7 @@ components:
           enum: [pim.product.tab, pim.category.tab, pim.product-grid.action-bar]
         type:
           type: string
-          default: simple_iframe
+          default: iframe
         configuration:
           type: object
           properties:

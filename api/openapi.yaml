@@ -176,16 +176,16 @@ components:
               example: https://www.example.com
             default_label:
               type: string
-              example: My awesome button extension
+              example: My awesome link extension
             labels:
               type: object 
               properties:
                 en_US:
                   type: string
-                  example: My awesome button extension
+                  example: My awesome link extension
                 fr_FR:
                   type: string
-                  example: Ma super button extension
+                  example: Ma super link extension
     ui_extension_iframe_request:
       type: object
       properties:
@@ -223,6 +223,43 @@ components:
                 fr_FR:
                   type: string
                   example: Ma super iFrame extension
+    ui_extension_action_request:
+      type: object
+      properties:
+        name:
+          type: string
+          example: my_awesome_action_extension
+        version:
+          type: string
+          example: 20250301250
+        description:
+          type: string
+          example: A short human readable description.
+        position:
+          type: string
+          default: pim.product.tab
+          enum: [pim.product.header, pim.product-model.header, pim.sub-product-model.header, pim.product-grid.action-bar]
+        type:
+          type: string
+          default: action
+        configuration:
+          type: object
+          properties:
+            url:
+              type: string
+              example: https://www.example.com
+            default_label:
+              type: string
+              example: My awesome action extension
+            labels:
+              type: object 
+              properties:
+                en_US:
+                  type: string
+                  example: My awesome action extension
+                fr_FR:
+                  type: string
+                  example: Ma super extension action
     ui_extension_link_response:
       type: object
       properties:
@@ -256,16 +293,16 @@ components:
               example: https://www.example.com
             default_label:
               type: string
-              example: My awesome button extension
+              example: My awesome link extension
             labels:
               type: object 
               properties:
                 en_US:
                   type: string
-                  example: My awesome button extension
+                  example: My awesome link extension
                 fr_FR:
                   type: string
-                  example: Ma super button extension
+                  example: Ma super link extension
     ui_extension_iframe_response:
       type: object
       properties:
@@ -306,6 +343,46 @@ components:
                 fr_FR:
                   type: string
                   example: Ma super iFrame extension
+    ui_extension_action_response:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 9c8a0eb1-64c9-4497-b09e-35300bf9aa6a
+        name:
+          type: string
+          example: my_awesome_action_extension
+        version:
+          type: string
+          example: 2025-03-02-109
+        description:
+          type: string
+          example: A short human readable description.
+        position:
+          type: string
+          default: pim.product.tab
+          enum: [pim.product.header, pim.product-model.header, pim.sub-product-model.header, pim.product-grid.action-bar]
+        type:
+          type: string
+          default: action
+        configuration:
+          type: object
+          properties:
+            url:
+              type: string
+              example: https://www.example.com
+            default_label:
+              type: string
+              example: My awesome action extension
+            labels:
+              type: object 
+              properties:
+                en_US:
+                  type: string
+                  example: My awesome action extension
+                fr_FR:
+                  type: string
+                  example: Ma super extension action
   securitySchemes:
     pim_access_token:
       type: apiKey

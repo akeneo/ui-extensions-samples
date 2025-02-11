@@ -27,12 +27,13 @@ paths:
     post:
       summary: 'Add an extension'
       description: |
-        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`.
+        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`, `pim.product-grid.action-bar`.
         For now, the only configuration keys are the same for all the position.
 
-        The `type` available are `iframe` and `link`. It depends on the `position` :
+        The `type` available are `iframe`, `link` and `action`. It depends on the `position` :
         - `iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
         - `link` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
+        - `action` for `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header` and `pim.product-grid.action-bar`
       operationId: add_extension
       tags:
         - UI Extension
@@ -46,6 +47,7 @@ paths:
               oneOf:
                 - $ref: "#/components/schemas/ui_extension_link_request"
                 - $ref: "#/components/schemas/ui_extension_iframe_request"
+                - $ref: "#/components/schemas/ui_extension_action_request"
       responses:
         '201':
           description: |
@@ -56,6 +58,7 @@ paths:
                 oneOf: 
                   - $ref: "#/components/schemas/ui_extension_link_response"
                   - $ref: "#/components/schemas/ui_extension_iframe_response"
+                  - $ref: "#/components/schemas/ui_extension_action_response"
         '400':
           description: |
             Invalid Json
@@ -66,12 +69,13 @@ paths:
     patch:
       summary: 'Update an extension'
       description: |
-        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`.
+        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`, `pim.product-grid.action-bar`.
         For now, the only configuration keys are the same for all the position.
 
-        The `type` available are `iframe` and `link`. It depends on the `position` :
+        The `type` available are `iframe`, `link` and `action`. It depends on the `position` :
         - `iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
         - `link` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
+        - `action` for `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header` and `pim.product-grid.action-bar`
       parameters:
         - $ref: "#/components/parameters/ui_extension_uuid"
       operationId: update_extension
@@ -87,6 +91,7 @@ paths:
               oneOf:
                 - $ref: "#/components/schemas/ui_extension_link_request"
                 - $ref: "#/components/schemas/ui_extension_iframe_request"
+                - $ref: "#/components/schemas/ui_extension_action_request"
       responses:
         '200':
           description: |
@@ -97,6 +102,7 @@ paths:
                 oneOf: 
                   - $ref: "#/components/schemas/ui_extension_link_response"
                   - $ref: "#/components/schemas/ui_extension_iframe_response"
+                  - $ref: "#/components/schemas/ui_extension_action_response"
         '400':
           description: |
             Invalid Json
@@ -142,6 +148,7 @@ components:
         anyOf: 
           - $ref: "#/components/schemas/ui_extension_link_request"
           - $ref: "#/components/schemas/ui_extension_iframe_request"
+          - $ref: "#/components/schemas/ui_extension_action_request"
     ui_extension_link_request:
       type: object
       properties:

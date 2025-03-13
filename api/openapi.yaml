@@ -27,11 +27,11 @@ paths:
     post:
       summary: 'Add an extension'
       description: |
-        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`, `pim.product-grid.action-bar`.
+        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.product-model.tab`, `pim.sub-product-model.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`, `pim.product-grid.action-bar`.
         For now, the only configuration keys are the same for all the position.
 
         The `type` available are `iframe`, `link` and `action`. It depends on the `position` :
-        - `iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
+        - `iframe` for `pim.product.tab`, `pim.product-model.tab`, `pim.sub-product-model.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
         - `link` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
         - `action` for `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header` and `pim.product-grid.action-bar`
       operationId: add_extension
@@ -69,11 +69,11 @@ paths:
     patch:
       summary: 'Update an extension'
       description: |
-        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`, `pim.product-grid.action-bar`.
+        The `configuration` depends on the `position`. Available positions are `pim.product.tab`, `pim.product-model.tab`, `pim.sub-product-model.tab`, `pim.category.tab` and `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header`, `pim.product-grid.action-bar`.
         For now, the only configuration keys are the same for all the position.
 
         The `type` available are `iframe`, `link` and `action`. It depends on the `position` :
-        - `iframe` for `pim.product.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
+        - `iframe` for `pim.product.tab`, `pim.product-model.tab`, `pim.sub-product-model.tab`, `pim.category.tab` and `pim.product-grid.action-bar`
         - `link` for `pim.product.header`, `pim.product-model.header` and `pim.sub-product-model.header`
         - `action` for `pim.product.header`, `pim.product-model.header`, `pim.sub-product-model.header` and `pim.product-grid.action-bar`
       parameters:
@@ -201,7 +201,7 @@ components:
         position:
           type: string
           default: pim.product.tab
-          enum: [pim.product.tab, pim.category.tab, pim.product-grid.action-bar]
+          enum: [pim.product.tab, pim.product-model.tab, pim.sub-product-model.tab, pim.category.tab, pim.product-grid.action-bar]
         type:
           type: string
           default: iframe
@@ -321,7 +321,7 @@ components:
         position:
           type: string
           default: pim.product.tab
-          enum: [pim.product.tab, pim.category.tab, pim.product-grid.action-bar]
+          enum: [pim.product.tab, pim.product-model.tab, pim.sub-product-model.tab, pim.category.tab, pim.product-grid.action-bar]
         type:
           type: string
           default: iframe

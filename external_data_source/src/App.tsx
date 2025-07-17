@@ -1,5 +1,6 @@
 import { SectionTitle } from "akeneo-design-system";
 import { useGetExternalData } from "./useGetExternalData.ts";
+import JsonRenderer from "./JsonRenderer.tsx";
 
 function App() {
   const response = useGetExternalData();
@@ -14,7 +15,7 @@ function App() {
     <SectionTitle>
       <SectionTitle.Title>External Data</SectionTitle.Title>
     </SectionTitle>
-    <pre>{JSON.stringify(response, null, 4)}</pre>
+    <JsonRenderer data={response} />
   </>
 }
 

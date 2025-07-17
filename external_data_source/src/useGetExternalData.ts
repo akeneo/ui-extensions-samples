@@ -4,10 +4,11 @@ const useGetExternalData = () => {
     const [datas, setData] = useState<any>();
 
     useEffect(() => {
-        globalThis.PIM.api.external.call({method: 'GET'}).then((data) => {
-            console.log('call made to external from the ext');
-            setData(data);
-        }).catch((error) => {
+        globalThis.PIM.api.external.call({method: 'GET'})
+        .then((res) => {
+            setData(res);
+        })
+        .catch((error) => {
             console.error('Error fetching external data:', error);
         });
     }, []);

@@ -1,7 +1,7 @@
 import React from "react";
 import Collapsible from "./Collapsible";
 
-type JsonValue = string | number | boolean | null | JsonObject | JsonValue[];
+export type JsonValue = string | number | boolean | null | JsonObject | JsonValue[];
 interface JsonObject {
   [key: string]: JsonValue;
 }

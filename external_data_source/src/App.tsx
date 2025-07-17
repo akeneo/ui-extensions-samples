@@ -1,22 +1,29 @@
-import { SectionTitle } from "akeneo-design-system";
-import { useGetExternalData } from "./useGetExternalData.ts";
-import JsonRenderer from "./JsonRenderer.tsx";
+import { Placeholder, SectionTitle, ServerErrorIllustration } from "akeneo-design-system";
+import { useGetExternalData } from "./useGetExternalData";
+import JsonRenderer from "./JsonRenderer";
 
 function App() {
-  const response = useGetExternalData();
+  const { data, loading, error } = useGetExternalData();
 
-/*   if (response.status !== 200) {
-    <SectionTitle>
-      <SectionTitle.Title>Error while fetching data.</SectionTitle.Title>
-    </SectionTitle>
-  } */
+  if (loading) {
+    return (
+      <SectionTitle>
+        <SectionTitle.Title>Loading...</SectionTitle.Title>
+      </SectionTitle>
+    );
+  }
 
-  return <>
-    <SectionTitle>
-      <SectionTitle.Title>External Data</SectionTitle.Title>
-    </SectionTitle>
-    <JsonRenderer data={response} />
-  </>
+  return (
+    <>
+      <SectionTitle style={{ marginBottom: 16 }}>
+        <SectionTitle.Title>External Data</SectionTitle.Title>
+      </SectionTitle>
+        {error || !data 
+          ?  <Placeholder illustration={<ServerErrorIllustration />} title={"Sorry, an error occured while fetching data."}/>
+          : <JsonRenderer data={data} />
+        }
+    </>
+  );
 }
 
-export default App
+export default App;
